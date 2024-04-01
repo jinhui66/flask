@@ -101,3 +101,4 @@ def stop_recruit():
         position.public = 0
         db.session.commit()
         return redirect(url_for("admin.recruit"))
+    
