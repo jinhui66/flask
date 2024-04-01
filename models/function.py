@@ -28,17 +28,18 @@ def redis_search_positions(keyword,Position):
 
         results_data = []
         for result in results:
-            results_data.append({
-            "id": result.id,
-            "company": result.company,
-            "position_name": result.position_name,
-            "salary": result.salary,
-            "education": result.education,
-            "description": result.description,
-            "address": result.address,
-            "release_time": result.release_time,
-            "admin": result.admin.to_dict()
-            })
+            if result.public == 1:
+                results_data.append({
+                "id": result.id,
+                "company": result.company,
+                "position_name": result.position_name,
+                "salary": result.salary,
+                "education": result.education,
+                "description": result.description,
+                "address": result.address,
+                "release_time": result.release_time,
+                "admin": result.admin.to_dict()
+                })
         # 序列化用户数据
         results_json = json.dumps(results_data,cls=ComplexEncoder)
         # 使用键将用户数据设置在Redis缓存中
