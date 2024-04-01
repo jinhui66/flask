@@ -263,7 +263,7 @@ button {
 
 
 .register_container input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(250, 250, 250, 0.7);
 }
 
 .register_container .tit {
@@ -281,4 +281,5 @@ button {
 
 .register_container .form-control {
     background: transparent;
+    color: #fff;
 }

@@ -15,7 +15,8 @@ body {
     padding: 100px; /* 内边距为20px，可以根据需要调整 */  
     box-sizing: border-box; /* 确保宽度和内边距的计算方式是包含内边距的 */  
     background-color: #fff; /* 背景颜色为白色，可以根据需要调整 */   
-    border-radius: 5px; /* 边框圆角为5像素，可以根据需要调整 */  
+    border-radius: 5px; /* 边框圆角为5像素，可以根据需要调整 */
+    border: solid rgb(36, 66, 174) 4px;  
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 盒子阴影，增加立体感 */  
 }
 
@@ -24,6 +25,7 @@ body {
     justify-content: space-between; /* 标签和文本框之间间隔 */  
     margin-bottom: 10px; /* 行与行之间的间隔 */  
     width: 90%;
+    position: relative;
 }
 
 
@@ -34,7 +36,7 @@ body {
 }  
 
 .input-wrapper{  
-    width: 200px; /* 文本框宽度填充其父元素 */  
+    width: 250px; /* 文本框宽度填充其父元素 */  
     box-sizing: border-box; /* 包含padding和border在width内 */
     padding-right: 30px;  
     /* padding: 10px */
@@ -86,21 +88,33 @@ form input[type="submit"] {
 
 #submit_button
 {
-    position: absolute;
+    position: relative;
     left: 40%;
     top: 19%;
 }
 
 #education
 {
-    position: absolute;
-    left: 31%;
-    width: 170px;
+    position: relative;
+    left: -390px;
+    width: 220px;
 }
 
-#address
+#living_address
 {
-    position: absolute;
-    left: 34%;
-    width: 203px;
+    position: relative;
+    left: -360px;
+    width: 220px;
+}
+
+select
+{
+    width: 100px;
+    height: 30px;
+}
+
+option
+{
+    width: 100px;
+    height: 30px;
 }

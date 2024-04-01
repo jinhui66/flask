@@ -46,7 +46,7 @@
             <div class="label">婚姻:</div>  
             <div class="input-wrapper">
             <class="input-wrapper">
-            <select id="marriage" name="marriage">  
+            <select id="marriage" name="marriage" style="width: 100px;height: 30px; font: 14px;">  
                 <option value="未婚" {% if resume.marriage == '未婚' %} selected {% endif %}>未婚</option>  
                 <option value="已婚" {% if resume.marriage == '已婚' %} selected {% endif %}>已婚</option>  
             </select> 
@@ -63,7 +63,15 @@
         
         <div class="row">
             <div class="label">学历:</div>
-            <div class="education"><input type="text" id="education" name="education" value="{{resume.education}}"></div>
+            <div class="input-wrapper"> 
+                <select id="gender" name="gender" style="position: relative;left: -360px;">  
+                    <option value="高中" >高中</option>  
+                    <option value="专科" >专科</option>
+                    <option value="本科" >大学</option>  
+                    <option value="硕士" >硕士</option> 
+                    <option value="博士" >博士</option>       
+                </select> 
+            </div>
         </div>
         <br>
         

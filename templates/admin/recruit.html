@@ -31,24 +31,19 @@
                             <span class="position-author"> {%if position.public == 1 %} 正在招聘 {%else%} 招聘已截止 {% endif %}</span>   
                             <span class="position-time">{{position.release_time}}</span>  
                         </div>  
-                        <form action='/recruit_info' method='POST'>
-                            <input type='hidden' name='position_id' value='{{position.id}}'>
-                            <input type='submit' value='查看投递简历' style="position: relative;
-                                                                            left: 10%;">
-                        </form>
-                        {% if position.public == 1 %}
-                            <form action='/stop_recruit' method='POST'>
+                        <div style="display: flex; align-items: center;">
+                            <form action='/recruit_info' method='POST' style="margin-right: 10px;">
                                 <input type='hidden' name='position_id' value='{{position.id}}'>
-                                <button style="width: 140px;height: 45px;
-                                    background-color:rgb(35, 150, 196) ;
-                                    color: white; 
-                                    outline: none;
-                                    border: none;
-                                    border-radius: 5%;
-                                    position: relative;
-                                    left: 60%;">截止招聘</button>
+                                <input type='submit' value='查看投递简历'>
                             </form>
-                        {% endif %}
+                        
+                            {% if position.public == 1 %}
+                                <form action='/stop_recruit' method='POST'>
+                                    <input type='hidden' name='position_id' value='{{position.id}}'>
+                                    <button style="width: 140px; height: 45px; background-color: rgb(35, 150, 196); color: white; outline: none; border: none; border-radius: 5%;">截止招聘</button>
+                                </form>
+                            {% endif %}
+                        </div>
                     </div>  
                     
                 </li>  
