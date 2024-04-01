@@ -15,7 +15,7 @@ import os
 # 啊大大大
 app = Flask(__name__)
 app.template_folder = 'templates'
-# 2222
+# 2222哈哈哈
 # 配置
 app.config.from_object(config)
   
