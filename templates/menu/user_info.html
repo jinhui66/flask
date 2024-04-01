@@ -6,7 +6,13 @@
 
 {% block style %}
     <link rel='stylesheet' href='{{url_for('static',filename='/css/resume.css')}}'>
-    <link rel='stylesheet' href='{{url_for('static',filename='/css/login.css')}}'> 
+    <link rel='stylesheet' href='{{url_for('static',filename='/css/login.css')}}'>
+    <style>
+        #post
+        {
+            border-bottom: 1px lightblue solid;
+        }
+    </style> 
 {% endblock %}
 
 {% block body %}
@@ -25,9 +31,9 @@
     
     <form name="form" method="POST" action="/upload_pic" enctype="multipart/form-data">  
         <input type="file" name="file_name">  
-        <input type="submit" value="上传"> 
+        <input type="submit" value="上传" id="post"> 
         <div>  
-            <img class="side-position-avatar" src="static/pictures/{{g.type}}/{{user.filepath}}" alt="" style="position: relative;
+            <img class="side-position-avatar" src="static/pictures/{{user.filepath}}" alt="" style="position: relative;
             left: 20%;">  
         </div>   
     </form> 
