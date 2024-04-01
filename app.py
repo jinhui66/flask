@@ -12,10 +12,10 @@ from models.table import User, Admin, Position
 import os
 # import torch
 
-# 啊大大大
+# 启动
 app = Flask(__name__)
 app.template_folder = 'templates'
-# 2222哈哈哈
+
 # 配置
 app.config.from_object(config)
   
