@@ -1,0 +1,55 @@
+body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+}  
+
+.row {
+    display: flex;
+    justify-content: space-between; /* 标签和文本框之间间隔 */  
+    margin-bottom: 10px; /* 行与行之间的间隔 */  
+    width: 90%;
+}
+
+
+.label {  
+    align-items: center; 
+    flex: 0 0 100px; /* 假设标签宽度为100px，不伸缩 */  
+    /* 其他标签样式，如字体大小、颜色等 */  
+}  
+
+.input-wrapper{  
+    width: 200px; /* 文本框宽度填充其父元素 */  
+    box-sizing: border-box; /* 包含padding和border在width内 */
+    padding-right: 30px;  
+    /* padding: 10px */
+    /* 其他文本框样式，如边框、内边距等 */  
+}
+
+form {  
+    width: 100%; 
+}  
+
+form input[type="email"],  
+form input[type="text"],  
+form input[type="number"] {  
+    width: 100%;  
+    padding: 5px;  
+    border: px solid #ccc;  
+    border-radius: 4px;  
+}  
+
+
+form input[type="submit"] {  
+    padding: 10px 20px;  
+    background-color: rgb(35, 150, 196);  
+    color: white;  
+    border: none;  
+    border-radius: 4px;  
+    cursor: pointer;  
+}  
+
+
+.position-main span{
+    font: 20px;
+    display: inline-block;
+}

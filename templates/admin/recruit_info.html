@@ -1,0 +1,40 @@
+<!-- 查看招聘信息>收到的简历  !-->
+{% extends 'base.html' %}
+
+{% block title %}
+查看收到的简历
+{% endblock %}
+
+{% block style %}
+<link rel='stylesheet' href='{{url_for('static',filename='/css/position_detail.css')}}'>
+{% endblock %}
+
+{% block body%}
+<div class="col-10">  
+    {% if resumes %}
+    <ul class="position-ul">    
+        {% for resume in resumes%}
+        <li>  
+            <div class="side-position">  
+                <img class="side-position-avatar" src="./static/pictures/admin/{{resume.user.filepath}}" alt="">  
+            </div>  
+            <div class="position-main">  
+                <div class="position-title">姓名:{{resume.name}} 性别:{{resume.gender}}</div>  
+                <div class="position-content">年龄: {{resume.age}}<br>期望职位:{{resume.expect_position}}<br>婚姻状况:{{resume.marriage}}
+                <br>期望月薪:{{resume.expect_salary}}<br>学历:{{resume.education}}<br>能力:{{resume.abilities}}<br>工作经验:{{resume.experience}}<br>自我评价:{{resume.about_me}}</div>  
+                <div class="position-detail">  
+                    <span class="position-author"></span>  
+                    <span class="position-time"></span>  
+                </div>  
+            </div>
+            <a href="static/send_resumes/{{resume.position_id}}/{{resume.filepath}}">Download PDF</a>
+            <a href="#"> 通过 </a>
+            <a href="#"> 驳回 </a>
+        </li>  
+        {% endfor %}
+    </ul>
+    {% else %}
+        无投递简历
+    {% endif %}
+</div>
+{% endblock %}

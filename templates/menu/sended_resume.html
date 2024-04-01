@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+已投简历
+{% endblock %}
+
+{% block style %}
+<link rel='stylesheet' href='{{url_for('static',filename='/css/resume.css')}}'>
+{% endblock %}
+
+{% block body %}
+    <div class="row" style="margin-top: 20px;"> 
+        已投递的简历 
+        <div class="col-10">  
+            {% if sended_resumes %}  
+            <ul class="position-ul">  
+                {% for sended_resume in sended_resumes %}  
+                <li>  
+                    <div class="side-position">  
+                        <img class="side-position-avatar" src="./static/images/avatar.jpg" alt="随便用的头像">  
+                    </div> 
+                    <div class="position-main">  
+                        <div class="position-title"><a href='/position_detail_action?position_id={{sended_resume.position.id}}&keyword={{keyword}}'>职位名称:{{sended_resume.position.position_name}}</a></div>  
+                        <div class="position-content">公司: {{sended_resume.position.company}}<br>月薪:{{sended_resume.position.salary}}
+                        <br>学历要求:{{sended_resume.position.education}}<br>地址:{{sended_resume.position.address}}<br>补充说明:{{sended_resume.position.description}}</div>  
+                        <div class="position-detail"> 
+                            <span class="position-author"></span>   
+                            <span class="position-time">{{sended_resume.position.release_time}}</span>  
+                        </div>  
+
+                    </div>  
+                </li>  
+                {% endfor %}  
+            </ul>  
+            {% else %}
+            无
+            {% endif %}  
+        </div>
+    </div>
+{% endblock %}

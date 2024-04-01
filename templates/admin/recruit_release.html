@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+招聘发布
+{% endblock %}
+
+{% block style %}
+<link rel='stylesheet' href='{{url_for('static',filename='/css/resume.css')}}'>
+{%endblock%}
+
+{% block body %}
+<div class="resume_container" style="position: absolute;top: 20%;left: 20%;">  
+    <h2>发布招聘</h2>
+    <br><br>
+    <form name="form" action="/release_action" method="POST" >  
+        <div class="row">  
+            <div class="label">公司:</div>
+            <div class="input-wrapper"><input type="text" id="conpany" name="company" required> </div>
+            <div class="label">职位名称:</div>  
+            <div class="input-wrapper"><input type="text" id="position_name" name="position_name" required> </div> 
+        </div>  
+
+        <div class="row">  
+            <div class="label">月薪:</div>
+            <div class="input-wrapper"><input type="text" id="salary" name="salary" required> </div>
+            <div class="label">学历要求:</div>  
+            <div class="input-wrapper"><input type="text" id="education" name="education" required style="position: relative;left: 1px;"> </div> 
+        </div>   
+        
+        <div class="row">
+            <div class="label">工作地址:</div>
+            <div class="input-wrapper"><input type="text" id="address" name="address" required style="position: relative;left: -170px; width: 300px;"></div>
+            <br> <br> 
+            
+        </div>
+        <div class="row">
+            <div class="label">职位描述:</div>
+            <div class="input-text"><textarea type="text" id="description" name="description" required style="width: 95%; border: solid balck 1px;"></textarea></div>
+        </div>
+        <br>
+        <center><input type="submit" value="发布"></center>
+    </form>  
+</div>  
+
+{% endblock %}
