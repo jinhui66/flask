@@ -14,6 +14,7 @@ class User(db.Model):
     # 定义反向关系  
     resume = db.relationship('Resume', backref='user', lazy='dynamic') 
     comment = db.relationship('Comment', backref='user', lazy='dynamic') 
+    send_resume = db.relationship('Send_resume', backref='user', lazy='dynamic') 
   
 class Resume(db.Model):  
     __tablename__ = 'Resume'    
