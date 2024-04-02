@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="{{url_for('static',filename='/bootstrap/bootstrap.4.6.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='/css/init.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='/css/index.css')}}">
+
     {%block style%} {% endblock %}
     <title>{% block title %}{% endblock %}</title>
-    <style>body{zoom: 85%;}</style>
+    <style>body{zoom: 85%;}
+              
+    </style>
 </head>
 
 <body>
@@ -29,7 +32,7 @@
                                 <a class="nav-link" href="{{url_for('user.resume')}}">个人简历</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{url_for('user.sended_resume')}}">已投简历</a>
+                                <a class="nav-link" id="sended_resume" href="{{url_for('user.sended_resume')}}">已投简历</a>
                             </li>
                         {% else %}
                             <li class="nav-item">

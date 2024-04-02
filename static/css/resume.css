@@ -1,7 +1,10 @@
 body {  
     font-family: Arial, sans-serif;  
     margin: 0;  
-}  
+    background-image: url("../images/bc2.jpg");
+    background-size: 120%;
+} 
+
 
 .gender-input {  
     margin-bottom: 10px;  
@@ -166,6 +169,11 @@ option
     position: absolute;
     bottom: 0px;
     right: 0px;
+}
+
+a:visited
+{
+    border-bottom: solid rgb(35, 150, 196) 2px;
 }
 
 

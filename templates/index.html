@@ -3,6 +3,9 @@
 {% block title %}
 个人主页
 {% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{{url_for('static',filename='/css/index.css')}}">
+{% endblock %}
 {% block body %}
 <div id="pic" style="background-color: paleturquoise; ">
     <image src="./static/images/company.png" width="400px" height="100px" ></image>

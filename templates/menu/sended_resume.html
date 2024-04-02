@@ -5,7 +5,10 @@
 {% endblock %}
 
 {% block style %}
-<link rel='stylesheet' href='{{url_for('static',filename='/css/resume.css')}}'>
+<link rel='stylesheet' href='{{url_for('static',filename='/css/sended.css')}}'>
+<style>
+    
+</style>
 {% endblock %}
 
 {% block body %}
@@ -21,7 +24,7 @@
                     </div> 
                     
                     <div class="position-main">  
-                        <div class="position-title"><a href='/position_detail_action?position_id={{sended_resume.position.id}}&keyword={{keyword}}'>职位名称:{{sended_resume.position.position_name}}</a></div>  
+                        <div class="position-title"><a href='/position_detail_action?position_id={{sended_resume.position.id}}&keyword={{keyword}}'><strong>职位名称:{{sended_resume.position.position_name}}</strong></a></div>  
                         <div class="position-content">公司: {{sended_resume.position.company}}<br>月薪:{{sended_resume.position.salary}}
                         <br>学历要求:{{sended_resume.position.education}}<br>地址:{{sended_resume.position.address}}<br>补充说明:{{sended_resume.position.description}}</div>  
                         <div class="position-detail"> 
