@@ -11,15 +11,13 @@
 {% block body %}
 
 <div class="resume_container"> 
-    
-    
+    <div class="triangle1"></div>
+    <div class="triangle2"></div>
     <h4 style="text-align: left;">上传简历</h4>
     <form name="form" method="POST" action="/upload" enctype="multipart/form-data">  
         <input type="file" name="file_name">  
         <input type="submit" id="submit_button" value="上传">  
     </form> 
-    <div class="triangle1"></div>
-    <div class="triangle2"></div>
     <br>
     <form name="form" action="/resume" method="POST"> 
         <h1 style="text-align: center;">个人简历</h1> 
@@ -68,7 +66,7 @@
         <div class="row">
             <div class="label">学历:</div>
             <div class="input-wrapper"> 
-                <select id="education" name="education" style="position: relative;left: -360px;">   
+                <select id="education" name="education" style="position: relative;left: -360px;width: 220px;">   
                     <option value="专科" {% if resume.education == '专科' %} selected {% endif %}>专科</option>
                     <option value="本科" {% if resume.education == '本科' %} selected {% endif %}>本科</option>  
                     <option value="硕士" {% if resume.education == '硕士' %} selected {% endif %}>研究生</option>      
