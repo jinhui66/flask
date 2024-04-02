@@ -25,14 +25,12 @@
                 <div class="position-detail">  
                     <span class="position-author">
                         <form name="form" action="/accept_action" method="POST" >  
-                            <input type='hidden' name='position_id' value='{{resume.position_id}}'>
                             <input type='hidden' name='send_resume_id' value='{{resume.id}}'>
                             <input type='submit' value='通过'>
                         </form>
                     </span>  
                     <span class="position-time">
                         <form name="form" action="/refuse_action" method="POST" >  
-                            <input type='hidden' name='position_id' value='{{resume.position_id}}'>
                             <input type='hidden' name='send_resume_id' value='{{resume.id}}'>
                             <input type='submit' value='驳回'>
                         </form>
