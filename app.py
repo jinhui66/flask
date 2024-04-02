@@ -80,7 +80,7 @@ def my_before_request():
     
 @app.context_processor
 def my_context_porcessor():
-    return {'user': g.user,'type':g.type}
+    return {'user':g.user,'type':g.type}
 
 if __name__ == '__main__':
     app.run(debug=True,host='127.0.0.1')

@@ -23,13 +23,26 @@
                 <div class="position-content">年龄: {{resume.age}}<br>期望职位:{{resume.expect_position}}<br>婚姻状况:{{resume.marriage}}
                 <br>期望月薪:{{resume.expect_salary}}<br>学历:{{resume.education}}<br>能力:{{resume.abilities}}<br>工作经验:{{resume.experience}}<br>自我评价:{{resume.about_me}}</div>  
                 <div class="position-detail">  
-                    <span class="position-author"></span>  
-                    <span class="position-time"></span>  
+                    <span class="position-author">
+                        <form name="form" action="/accept_action" method="POST" >  
+                            <input type='hidden' name='send_resume_id' value='{{resume.id}}'>
+                            <input type='submit' value='通过'>
+                        </form>
+                    </span>  
+                    <span class="position-time">
+                        <form name="form" action="/refuse_action" method="POST" >  
+                            <input type='hidden' name='send_resume_id' value='{{resume.id}}'>
+                            <input type='submit' value='驳回'>
+                        </form>
+                    </span>  
                 </div>  
             </div>
             <a href="data/send_resumes/{{resume.position_id}}/{{resume.filepath}}">Download PDF</a>
-            <a href="accept_action"> 通过 </a>
-            <a href="refuse_action"> 驳回 </a>
+
+            
+
+            
+
         </li>  
         {% endfor %}
     </ul>

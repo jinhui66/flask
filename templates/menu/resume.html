@@ -67,9 +67,9 @@
             <div class="label">学历:</div>
             <div class="input-wrapper"> 
                 <select id="education" name="education" style="position: relative;left: -360px;">   
-                    <option value="专科" >专科</option>
-                    <option value="本科" >本科</option>  
-                    <option value="硕士" >研究生</option>      
+                    <option value="专科" {% if resume.education == '专科' %} selected {% endif %}>专科</option>
+                    <option value="本科" {% if resume.education == '本科' %} selected {% endif %}>本科</option>  
+                    <option value="硕士" {% if resume.education == '硕士' %} selected {% endif %}>研究生</option>      
                 </select> 
             </div>
         </div>

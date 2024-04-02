@@ -2,7 +2,7 @@ from flask import Blueprint,url_for
 from flask_mail import Message
 from flask import request,render_template,session,redirect
 from exts import db,mail
-from models.table import User, Resume, Position, Comment, Send_resume, Admin
+from models.table import User, Resume, Position, Comment, Send_resume, Admin,Accept_resume,Refuse_resume
 import os
 
 # admin
@@ -101,4 +101,35 @@ def stop_recruit():
         position.public = 0
         db.session.commit()
         return redirect(url_for("admin.recruit"))
+    
+@bp.route('/accept_action',methods=['GET','POST'])
+def accept_action():
+    if request.method == 'GET':
+        pass
+    else:
+        send_resume_id = request.form.get('send_resume_id')
+
+        if Accept_resume.query.filter_by(send_resume_id=send_resume_id).first():
+            return 'error'
+        else:
+            accept_resume = Accept_resume(send_resume_id=send_resume_id)
+            db.session.add(accept_resume)
+            db.session.commit()
+        return redirect(url_for('admin.recruit_info',method='GET'))
+    
+@bp.route('/refuse_action',methods=['GET','POST'])
+def refuse_action():
+    if request.method == 'GET':
+        pass
+    else:
+        send_resume_id = request.form.get('send_resume_id')
+        
+        if Refuse_resume.query.filter_by(send_resume_id=send_resume_id).first():
+            return 'error'
+        else:
+            refuse_resume = Refuse_resume(send_resume_id=send_resume_id)
+            db.session.add(refuse_resume)
+            db.session.commit()
+        return redirect(url_for('admin.recruit_info',method='GET'))
+
     
