@@ -2,7 +2,7 @@ from flask import Blueprint,url_for
 from flask_mail import Message
 from flask import request,render_template,session,redirect
 from exts import db,mail
-from models.table import User, Resume, Position, Comment, Send_resume, Admin,Accept_resume,Refuse_resume
+from models.table import User, Resume, Position, Comment, Send_resume, Admin
 import os
 
 # admin
@@ -33,12 +33,24 @@ def recruit():
         pass
         # admin_id = session.get('user_id')
         # return render_template('admin/recruit.html')
-    
+
+@bp.route('/recruit_info_action',methods=['GET','POST'])
+def recruit_info_action():
+    if request.method == 'GET':
+        position_id = request.args.get('position_id')
+        session['position_id'] = position_id
+        return redirect(url_for('admin.recruit_info'))
+    else:
+        position_id = request.form.get('position_id')
+        session['position_id'] = position_id
+        return redirect(url_for('admin.recruit_info'))
+
 @bp.route('/recruit_info',methods=['GET','POST'])
 def recruit_info():
     if request.method == 'GET':
-        # admin_id = session.get('user_id')
-        position_id = request.args.get('position_id')
+        admin_id = session.get('user_id')
+        # position_id = request.args.get('position_id')
+        position_id = session.get('position_id')
         receive_resumes = Send_resume.query.filter_by(position_id=position_id).all()
         resumes = []
         for receive_resume in receive_resumes:
@@ -46,7 +58,8 @@ def recruit_info():
         return render_template('admin/recruit_info.html',resumes=resumes)                
     else:
         # admin_id = session.get('user_id')
-        position_id = request.form.get('position_id')
+        # position_id = request.form.get('position_id')
+        position_id = session.get('position_id')
         receive_resumes = Send_resume.query.filter_by(position_id=position_id).all()
         resumes = []
         for receive_resume in receive_resumes:
@@ -97,7 +110,7 @@ def stop_recruit():
     else:
         position_id = request.form.get('position_id')
         position = Position.query.filter_by(id=position_id).first()
-        print(position_id)
+        # print(position_id)
         position.public = 0
         db.session.commit()
         return redirect(url_for("admin.recruit"))
@@ -109,13 +122,11 @@ def accept_action():
     else:
         send_resume_id = request.form.get('send_resume_id')
 
-        if Accept_resume.query.filter_by(send_resume_id=send_resume_id).first():
-            return 'error'
-        else:
-            accept_resume = Accept_resume(send_resume_id=send_resume_id)
-            db.session.add(accept_resume)
+        if Send_resume.query.filter_by(send_resume_id=send_resume_id).first():
+            send_resume = Send_resume.query.filter_by(send_resume_id=send_resume_id).first()
+            send_resume.status = 'accept'
             db.session.commit()
-        return redirect(url_for('admin.recruit_info',method='GET'))
+        return redirect(url_for('admin.recruit_info'))
     
 @bp.route('/refuse_action',methods=['GET','POST'])
 def refuse_action():
@@ -124,12 +135,10 @@ def refuse_action():
     else:
         send_resume_id = request.form.get('send_resume_id')
         
-        if Refuse_resume.query.filter_by(send_resume_id=send_resume_id).first():
-            return 'error'
-        else:
-            refuse_resume = Refuse_resume(send_resume_id=send_resume_id)
-            db.session.add(refuse_resume)
+        if Send_resume.query.filter_by(send_resume_id=send_resume_id).first():
+            s = Send_resume.query.filter_by(send_resume_id=send_resume_id).first()
+            s.status = 'refuse'
             db.session.commit()
-        return redirect(url_for('admin.recruit_info',method='GET'))
+        return redirect(url_for('admin.recruit_info'))
 
     

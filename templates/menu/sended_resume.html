@@ -20,18 +20,27 @@
                 {% for sended_resume in sended_resumes %}  
                 <li>  
                     <div class="side-position">  
-                        <img class="side-position-avatar" src='/data/pictures/admin/1/picture.jpg' alt="随便用的头像">  
+                        <img class="side-position-avatar" src='/data/pictures/admin/{{sended_resume.position.admin.filepath}}' alt="随便用的头像">  
                     </div> 
-                    
                     <div class="position-main">  
                         <div class="position-title"><a href='/position_detail_action?position_id={{sended_resume.position.id}}&keyword={{keyword}}'><strong>职位名称:{{sended_resume.position.position_name}}</strong></a></div>  
                         <div class="position-content">公司: {{sended_resume.position.company}}<br>月薪:{{sended_resume.position.salary}}
                         <br>学历要求:{{sended_resume.position.education}}<br>地址:{{sended_resume.position.address}}<br>补充说明:{{sended_resume.position.description}}</div>  
                         <div class="position-detail"> 
+                            {% if sended_resume.status == 'waiting' %}
+                                待回复
+                            {% elif sended_resume.status == 'accept' %}
+                                已被接收
+                            {% elif sended_resume.status == 'refuse' %}
+                                已被拒绝
+                            {% else %}
+                                出错! '不明确'
+                            {% endif %}
                             <span class="position-author"></span>   
-                            <span class="position-time">{{sended_resume.position.release_time}}</span>  
+                            <span class="position-time">{{sended_resume.send_time}}</span>  
+                            
                         </div>  
-
+                        
                     </div>  
                 </li>  
                 {% endfor %}  

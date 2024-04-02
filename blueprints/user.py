@@ -116,6 +116,8 @@ def send_resume():
         filepath = f'data/send_resumes/{position_id}/' + resume.filepath
         shutil.copy(f'data/resumes/{resume.filepath}',filepath)
         
+        
+        
         if Send_resume.query.filter_by(user_id=user_id,position_id=position_id).first() is not None :
             send = Send_resume.query.filter_by(user_id=user_id,position_id=position_id).first()
             send.name = resume.name  
@@ -132,6 +134,7 @@ def send_resume():
             send.abilities = resume.abilities
             send.about_me = resume.about_me
             send.filepath = resume.filepath
+            send.status = 'waiting'
             
         else:
             send = Send_resume(name = resume.name,
@@ -149,8 +152,10 @@ def send_resume():
                             about_me = resume.about_me,
                             user_id = user_id,
                             position_id = position_id,
-                            filepath = resume.filepath
+                            filepath = resume.filepath,
+                            status = 'waiting'
                             )
+
             db.session.add(send)
         db.session.commit()
         

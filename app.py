@@ -31,12 +31,12 @@ def second_static(filename):
     return send_from_directory(SECOND_STATIC_FOLDER, filename)  
   
 # 确保上传文件夹存在  
-if not os.path.exists('static/resumes'):  
-    os.makedirs('static/resumes')  
-if not os.path.exists('static/pictures'):  
-    os.makedirs('static/pictures')  
-if not os.path.exists('static/send_resumes'):
-    os.mkdir('static/send_resumes')
+if not os.path.exists('data/resumes'):  
+    os.makedirs('data/resumes')  
+if not os.path.exists('data/pictures'):  
+    os.makedirs('data/pictures')  
+if not os.path.exists('data/send_resumes'):
+    os.mkdir('data/send_resumes')
 
 db.init_app(app)
 mail.init_app(app)
