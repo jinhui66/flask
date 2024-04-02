@@ -42,7 +42,7 @@
                 <ul class="navbar-nav">
                     {% if user %}
                     <li class="nav-item ">
-                        <a class="nav-link">{% if type=='user' %}求职者{% else %}招聘者{% endif %}</a>
+                        <label class="nav-link">{% if type=='user' %}求职者{% else %}招聘者{% endif %}</label>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="{{url_for('user.user_info')}}">{{user.username}}</a>
