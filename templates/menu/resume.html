@@ -64,12 +64,10 @@
         <div class="row">
             <div class="label">学历:</div>
             <div class="input-wrapper"> 
-                <select id="gender" name="gender" style="position: relative;left: -360px;">  
-                    <option value="高中" >高中</option>  
-                    <option value="专科" >专科</option>
-                    <option value="本科" >大学</option>  
-                    <option value="硕士" >硕士</option> 
-                    <option value="博士" >博士</option>       
+                <select id="education" name="education" style="position: relative;left: -360px;">  
+                    <option value="专科" {% if resume.education == '专科' %} selected {% endif %}>专科</option>
+                    <option value="本科" {% if resume.education == '本科' %} selected {% endif %}>本科</option>  
+                    <option value="研究生" {% if resume.education == '研究生' %} selected {% endif %}>研究生</option>     
                 </select> 
             </div>
         </div>
