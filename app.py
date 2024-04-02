@@ -1,4 +1,4 @@
-from flask import Flask,redirect,session,g
+from flask import Flask,redirect,session,g,send_from_directory  
 import config
 from exts import db,mail
 from flask_migrate import Migrate
@@ -18,6 +18,17 @@ app.template_folder = 'templates'
 
 # 配置
 app.config.from_object(config)
+  
+# 默认的静态文件夹仍然是 'static'  
+app.static_folder = 'static'  # 可以省略  
+  
+# 定义第二个静态文件夹的路径  
+SECOND_STATIC_FOLDER = 'data'  
+  
+# 为第二个静态文件夹定义路由  
+@app.route('/data/<path:filename>')  
+def second_static(filename):  
+    return send_from_directory(SECOND_STATIC_FOLDER, filename)  
   
 # 确保上传文件夹存在  
 if not os.path.exists('static/resumes'):  

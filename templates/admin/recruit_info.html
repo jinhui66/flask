@@ -16,7 +16,7 @@
         {% for resume in resumes%}
         <li>  
             <div class="side-position">  
-                <img class="side-position-avatar" src="./static/pictures/admin/{{resume.user.filepath}}" alt="">  
+                <img class="side-position-avatar" src="data/pictures/admin/{{resume.user.filepath}}" alt="">  
             </div>  
             <div class="position-main">  
                 <div class="position-title">姓名:{{resume.name}} 性别:{{resume.gender}}</div>  
@@ -27,7 +27,7 @@
                     <span class="position-time"></span>  
                 </div>  
             </div>
-            <a href="static/send_resumes/{{resume.position_id}}/{{resume.filepath}}">Download PDF</a>
+            <a href="data/send_resumes/{{resume.position_id}}/{{resume.filepath}}">Download PDF</a>
             <a href="#"> 通过 </a>
             <a href="#"> 驳回 </a>
         </li>  

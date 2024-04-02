@@ -23,7 +23,7 @@ def upload_pdf():
         resume = Resume.query.filter_by(user_id=user_id).first()
         # filename = secure_filename(file.filename) 
         resume.filepath = str(user_id)+'/'+'resume.pdf'
-        root_path = 'static/resumes/'+resume.filepath
+        root_path = 'data/resumes/'+resume.filepath
         file.save(root_path)  
         db.session.commit()
         print(extract_text_from_pdf(root_path))
@@ -46,7 +46,7 @@ def upload_pic():
             user = Admin.query.filter_by(id=user_id).first()
         filename = secure_filename(file.filename) 
         user.filepath = str(user_id)+'/'+'picture.jpg'
-        root_path = f'static/pictures/{type}/' + user.filepath
+        root_path = f'data/pictures/{type}/' + user.filepath
         file.save(root_path)  
         db.session.commit()
         # print(extract_text_from_pdf(resume.filepath))

@@ -82,18 +82,18 @@ def register():
                 db.session.add(user)
                 db.session.commit()
                 # 创建文件夹
-                if not os.path.exists('static/pictures/user/'+str(user.id)):  
-                    os.makedirs('static/pictures/user/'+str(user.id))  
-                if not os.path.exists('static/resumes/'+str(user.id)):  
-                    os.makedirs('static/resumes/'+str(user.id))  
+                if not os.path.exists('data/pictures/user/'+str(user.id)):  
+                    os.makedirs('data/pictures/user/'+str(user.id))  
+                if not os.path.exists('data/resumes/'+str(user.id)):  
+                    os.makedirs('data/resumes/'+str(user.id))  
                 
                 return redirect(url_for('menu.login'))
             else: #type == 'admin'
                 admin = Admin(email=email,username=username,password=hashlib.sha256(password.encode('utf-8')).hexdigest())
                 db.session.add(admin)
                 db.session.commit()
-                if not os.path.exists('static/pictures/admin/'+str(admin.id)):  
-                    os.makedirs('static/pictures/admin/'+str(admin.id))  
+                if not os.path.exists('data/pictures/admin/'+str(admin.id)):  
+                    os.makedirs('data/pictures/admin/'+str(admin.id))  
                 return redirect(url_for('menu.login'))
         else:
             for field, errors in form.errors.items():  

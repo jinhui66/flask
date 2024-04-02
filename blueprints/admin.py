@@ -85,8 +85,8 @@ def release_action():
         db.session.add(position)
         db.session.commit()
         
-        if not os.path.exists(f'static/send_resumes/{position.id}'):
-            os.mkdir(f'static/send_resumes/{position.id}')
+        if not os.path.exists(f'data/send_resumes/{position.id}'):
+            os.mkdir(f'data/send_resumes/{position.id}')
 
         return redirect(url_for("admin.recruit",method='POST'))
         

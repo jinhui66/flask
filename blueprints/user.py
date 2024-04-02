@@ -107,14 +107,14 @@ def send_resume():
         position_id = request.form.get('position_id')
         resume = Resume.query.filter_by(user_id=user_id).first()
         
-        if not os.path.exists(f'static/send_resumes/{position_id}/{user_id}'):
-            os.mkdir(f'static/send_resumes/{position_id}/{user_id}')
+        if not os.path.exists(f'data/send_resumes/{position_id}/{user_id}'):
+            os.mkdir(f'data/send_resumes/{position_id}/{user_id}')
         
-        if resume.filepath == '' or not os.path.exists(f'static/resumes/{resume.filepath}'):
+        if resume.filepath == '' or not os.path.exists(f'data/resumes/{resume.filepath}'):
             return '请上传简历'
             
-        filepath = f'static/send_resumes/{position_id}/' + resume.filepath
-        shutil.copy(f'static/resumes/{resume.filepath}',filepath)
+        filepath = f'data/send_resumes/{position_id}/' + resume.filepath
+        shutil.copy(f'data/resumes/{resume.filepath}',filepath)
         
         if Send_resume.query.filter_by(user_id=user_id,position_id=position_id).first() is not None :
             send = Send_resume.query.filter_by(user_id=user_id,position_id=position_id).first()
