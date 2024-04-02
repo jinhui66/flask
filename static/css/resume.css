@@ -21,6 +21,7 @@ body {
     border-radius: 5px; /* 边框圆角为5像素，可以根据需要调整 */
     border: solid rgb(83, 117, 239) 4px;  
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 盒子阴影，增加立体感 */  
+    position: relative;
 }
 
 .row {

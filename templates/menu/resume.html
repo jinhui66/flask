@@ -11,13 +11,15 @@
 {% block body %}
 
 <div class="resume_container"> 
-    <div class="triangle1"></div>
-    <div class="triangle2"></div>
+    
+    
     <h4 style="text-align: left;">上传简历</h4>
     <form name="form" method="POST" action="/upload" enctype="multipart/form-data">  
         <input type="file" name="file_name">  
         <input type="submit" id="submit_button" value="上传">  
     </form> 
+    <div class="triangle1"></div>
+    <div class="triangle2"></div>
     <br>
     <form name="form" action="/resume" method="POST"> 
         <h1 style="text-align: center;">个人简历</h1> 

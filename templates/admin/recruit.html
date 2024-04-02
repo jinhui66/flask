@@ -11,10 +11,10 @@
 {% block body%}
 <div class="container">  
     <form action='recruit_release' method='POST'>
-        <input type='submit' value='发布招聘' >
+        <input class="publish" type='submit' value='发布招聘' >
     </form>
     <div class="row" style="margin-top: 20px;"> 
-        已发布的招聘信息 
+        <p>已发布的招聘信息 </p>
         <div class="col-10">  
             {% if released_positions %}  
             <ul class="position-ul">  
@@ -28,7 +28,6 @@
                         <div class="position-content"><span>公司: {{position.company}}</span><br><span>月薪:{{position.salary}}</span>
                         <br>学历要求:{{position.education}}<br>地址:{{position.address}}<br>补充说明:{{position.description}}</div>  
                         <div class="position-detail"> 
-                            <span class="position-author"> {%if position.public == 1 %} 正在招聘 {%else%} 招聘已截止 {% endif %}</span>   
                             <span class="position-time">{{position.release_time}}</span>  
                         </div>  
                         <div style="display: flex; align-items: center;">
@@ -42,6 +41,10 @@
                                     <input type='hidden' name='position_id' value='{{position.id}}'>
                                     <button style="width: 140px; height: 45px; background-color: rgb(35, 150, 196); color: white; outline: none; border: none; border-radius: 5%;">截止招聘</button>
                                 </form>
+                            {% endif %}
+
+                            {% if position.public == 0 %}
+                                <label style="width: 300px; position: relative; left: -150px; font-size: 20px;">招聘已截止</label>
                             {% endif %}
                         </div>
                     </div>  
