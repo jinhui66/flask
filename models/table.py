@@ -108,25 +108,38 @@ class Send_resume(db.Model):
 
     filepath = db.Column(db.String(255), nullable=True)  
     
+    status = db.Column(db.String(8), nullable=True)
+    
     # 添加外键列  
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)  
     position_id = db.Column(db.Integer, db.ForeignKey(Position.id), nullable=False)
     
-    accept_resume = db.relationship('Accept_resume',backref='send_resume',lazy='dynamic')
-    refuse_resume = db.relationship('Refuse_resume',backref='send_resume',lazy='dynamic')
+    # send_resume_status = db.relationship('Send_resume_status',backref='send_resume',lazy='dynamic')
     
-class Accept_resume(db.Model):
-    __tablename__ = 'accept_resume'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+# class Send_resume_status(db.Model):
+#     __tablename__ = 'send_resume_status'
+#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     
-    # 外键
-    send_resume_id =  db.Column(db.Integer, db.ForeignKey(Send_resume.id), nullable=False)  
+#     send_resume_id = db.Column(db.Integer, db.ForeignKey(Send_resume.id), nullable=False)
     
-class Refuse_resume(db.Model):
-    __tablename__ = 'refuse_resume'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     
-    refuse_resume_id = db.Column(db.Integer, db.ForeignKey(Send_resume.id), nullable=False)  
+#     a = db.relationship('Send_resume',backref='send_status',lazy='dynamic')
+    
+# class Accept_resume(db.Model):
+#     __tablename__ = 'accept_resume'
+#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    
+#     send_resume = db.relationship('Send_resume',backref='accept_resume',lazy='dynamic')
+#     # 外键
+#     send_resume_id =  db.Column(db.Integer, db.ForeignKey(Send_resume.id), nullable=False)  
+    
+# class Refuse_resume(db.Model):
+#     __tablename__ = 'refuse_resume'
+#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    
+#     send_resume = db.relationship('Send_resume',backref='refuse_resume',lazy='dynamic')
+    
+#     refuse_resume_id = db.Column(db.Integer, db.ForeignKey(Send_resume.id), nullable=False)  
 
 # class PDFDocument(db.Model):  
 #     id = db.Column(db.Integer, primary_key=True, autoincrement=True)  
