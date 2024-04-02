@@ -1,4 +1,4 @@
-
+# 自己进行配置
 SECRET_KEY = '123456'
 # 数据库的配置信息
 HOSTNAME = "127.0.0.1"
@@ -15,5 +15,5 @@ MAIL_SERVER = "smtp.qq.com"
 MAIL_USER_SSL = True
 MAIL_PORT = 587
 MAIL_USERNAME = "1303101041@qq.com"
-MAIL_PASSWORD = "qsdsugwiquodigjh"
+MAIL_PASSWORD = "qsdsugwiquodig**"
 MAIL_DEFAULT_SENDER = "1303101041@qq.com"
