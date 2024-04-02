@@ -15,11 +15,11 @@ function bindEmailCaptchaClick(){
       success: function (result){
         var code = result['code'];
         if(code == 200){
-          var countdown = 5;
+          var countdown = 30;
           // 开始倒计时之前，就取消按钮的点击事件
           $this.off("click");
           var timer = setInterval(function (){
-            $this.text(countdown);
+            $this.text("请等待"+countdown+"秒");
             countdown -= 1;
             // 倒计时结束的时候执行
             if(countdown <= 0){
