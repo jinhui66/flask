@@ -19,9 +19,9 @@
                 <img class="side-position-avatar" src="data/pictures/user/{{resume.user.filepath}}" alt="">  
             </div>  
             <div class="position-main">  
-                <div class="position-title">姓名:{{resume.name}} 性别:{{resume.gender}}</div>  
-                <div class="position-content">年龄: {{resume.age}}<br>期望职位:{{resume.expect_position}}<br>婚姻状况:{{resume.marriage}}
-                <br>期望月薪:{{resume.expect_salary}}<br>学历:{{resume.education}}<br>能力:{{resume.abilities}}<br>工作经验:{{resume.experience}}<br>自我评价:{{resume.about_me}}</div>  
+                <div class="position-title">姓名: &nbsp;&nbsp;{{resume.name}} &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;性别: &nbsp;&nbsp;{{resume.gender}}</div>  
+                <div class="position-content">年龄: &nbsp;&nbsp;{{resume.age}}<br>期望职位: &nbsp;&nbsp;{{resume.expect_position}}<br>婚姻状况: &nbsp;&nbsp;{{resume.marriage}}
+                <br>期望月薪: &nbsp;&nbsp;{{resume.expect_salary}}<br>学历: &nbsp;&nbsp;{{resume.education}}<br>能力: &nbsp;&nbsp;{{resume.abilities}}<br>工作经验: &nbsp;&nbsp;{{resume.experience}}<br>自我评价: &nbsp;&nbsp; &nbsp;&nbsp;{{resume.about_me}}</div>  
                 <div class="position-detail">  
                     {% if resume.status == 'waiting' %}
                         待回复
@@ -30,7 +30,7 @@
                     {% elif resume.status == 'refuse' %}
                         已拒绝
                     {% endif %}
-                    
+                    <div style="display: flex; align-items: center;justify-content: space-around;">
                     <span class="position-author">
                         <form name="form" action="/accept_action" method="POST" >  
                             <input type='hidden' name='send_resume_id' value='{{resume.id}}'>
@@ -43,6 +43,7 @@
                             <input type='submit' value='拒接'>
                         </form>
                     </span>  
+                    </div>
                 </div>  
             </div>
             <a href="data/send_resumes/{{resume.position_id}}/{{resume.filepath}}">下载简历</a>

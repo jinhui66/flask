@@ -113,6 +113,9 @@ p{
     color: #259;
     font-size:28px;
     font-weight: 900;
+    position: relative;
+    left: 25px;
+    top: 10px;
 }
 /*  */
 /* .position-content-detail{ */
