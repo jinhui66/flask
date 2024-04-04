@@ -10,8 +10,8 @@
     height:100%;
 }
 .side-position-avatar{
-    width: 38px;
-    height:38px;
+    width: 80px;
+    height:auto;
     border-radius: 3px;
 }
 
@@ -24,7 +24,7 @@
 
 .position-title a{
     color: #259;
-    font-size:14px;
+    font-size:22px;
     font-weight: 900;
 }
 .position-author{
@@ -33,7 +33,7 @@
 }
 .position-content{
     margin-top: 5px;
-    font-size:12px;
+    font-size: 16px;
 }
 .position-detail{
     text-align: right;
@@ -165,3 +165,58 @@ body{
     background-image: url("../images/bc2.jpg");
     background-size: 120%;
 }
+
+
+.sidebar {
+    position: relative;
+    width: 1200px;
+    height: 600px;
+    margin: 50px auto;
+    color: black;
+}
+
+.sidebar ul {
+    width: 200px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.sidebar ul li {
+    list-style: none;
+    height: 70px;
+    padding: 10px 0;
+    transition: all .5s;
+}
+
+.sidebar ul li p {
+    float: left;
+    margin-left: -15px;
+}
+
+.sidebar ul li span {
+    float: right;
+    margin-right: 20px;
+}
+
+
+.sidebar ul li:hover {
+    background-color: #92e5ed;
+    padding-left:0px;
+    cursor: pointer;
+}
+
+.sidebar ul li:hover .sidebar-mask {
+    display: block;
+}
+
+.sidebar-mask {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 900px;
+    height: 200px;
+    background-color: #ffff;
+    text-align: center;
+}
+
