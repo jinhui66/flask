@@ -170,5 +170,11 @@ a:visited
     border-bottom: solid rgb(35, 150, 196) 2px;
 }
 
+#education
+{
+    position: relative;
+    left: -390px;
+}
+
 
 
