@@ -4,7 +4,7 @@
 {% endblock %} 
 {% block style %}
     <link rel='stylesheet' href='{{url_for('static',filename='/css/login.css')}}'> 
-    
+    <script src='{{url_for('static',filename='/js/jquery.min.js')}}'></script> 
     <script src='{{url_for('static',filename='/js/jquery.min.css')}}'> </script>
 {% endblock %}
 {% block body %}  
@@ -26,7 +26,7 @@
 
 <div class="login_container"> 
     <div class="tit">login</div> 
-    <form id="loginForm" action='/login' method='POST'>  
+    <form id="loginForm" >  
         <select id="type" name="type">  
             <option value="user">求职者</option>  
             <option value="admin">招聘者</option>  
@@ -44,22 +44,36 @@
     </form>  
         <p><a href="/forgot_password">忘记密码?</a></p>
         <div id="errorMessage" class="error-message"></div>
+        
 </div>   
 <script>
-    function checkPassword() {
-        const passwordInput = document.getElementById("password").value;
-        const correctPassword = "correct_password"; 
 
-        if (passwordInput === correctPassword) {
-            return true;
-        } else {
-            const errorMessageElement = document.getElementById("errorMessage");
-            errorMessageElement.textContent = "密码输入错误，请重试。";
-            return false;
-        }
-    }
-
-    document.getElementById("loginForm").addEventListener("submit", checkPassword);
+    $(document).ready(function() {  
+        $('#loginForm').on('submit', function(e) {  
+            e.preventDefault();  // 阻止表单默认的提交行为 \
+            var email = $("input[name='email']").val(); 
+            var password = $("input[name='password']").val(); 
+            var type = $("select[name='type']").val();
+            alert(type);
+            $.ajax({  
+                url: '/login_action',  
+                method: 'POST',  
+                data: {email: email, password: password},
+                success: function(response) {  
+                    if (response.status == 'success') {  
+                        alert("3");
+                    } else {
+                        $('#password').val('');  // 清空输入框 
+                        alert(response.message);  
+                    }  
+                },  
+                error: function(error) {  
+                    alert('error');
+                    console.error(error);  
+                }  
+            });  
+        });  
+    });       
 </script>
 </body>
 {% endblock %}
