@@ -1,5 +1,5 @@
 from flask import Blueprint
-from flask import Flask,request,render_template,session,redirect,url_for
+from flask import Flask,request,render_template,session,redirect,url_for,jsonify
 from flask_sqlalchemy import SQLAlchemy
 from redis import Redis
 from exts import db,mail,xtredis
@@ -28,17 +28,32 @@ def position_detail():
     if request.method == 'POST':
         pass
 
-@bp.route('/position_comment',methods=['GET','POST'])
-def position_comment():
+# @bp.route('/position_comment',methods=['GET','POST'])
+# def position_comment():
+#     if request.method == 'GET':
+#         pass
+#     else:
+#         user_id = session.get('user_id')
+#         page = request.form.get('page')
+#         position_id = request.form.get('position_id')
+#         position = Position.query.filter_by(id=position_id).first()
+#         content = request.form.get('content')
+#         comment = Comment(content=content,position_id=position.id,user_id=user_id)
+#         db.session.add(comment)
+#         db.session.commit()
+#         return redirect(url_for('position.position_detail'))
+    
+@bp.route('/add_comment',methods=['GET','POST'])
+def add_comment():
     if request.method == 'GET':
+        print('1')
         pass
     else:
-        user_id = session.get('user_id')
-        page = request.form.get('page')
-        position_id = request.form.get('position_id')
-        position = Position.query.filter_by(id=position_id).first()
+        print('成功')
         content = request.form.get('content')
-        comment = Comment(content=content,position_id=position.id,user_id=user_id)
+        user_id = session.get('user_id')
+        position_id = request.form.get('position_id')
+        comment = Comment(content=content,position_id=position_id,user_id=user_id)
         db.session.add(comment)
         db.session.commit()
-        return redirect(url_for('position.position_detail'))
+        return jsonify({'status':'success','message':'comment successfully','comment':comment})
