@@ -166,31 +166,33 @@ body{
     background-size: 120%;
 }
 
-
 .sidebar {
     position: relative;
     width: 1200px;
     height: 600px;
     margin: 50px auto;
     color: black;
+    
 }
 
 .sidebar ul {
     width: 200px;
     height: 100%;
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(26, 134, 100, 0.3);
+    margin: 0;
+    padding: 0;
 }
 
 .sidebar ul li {
     list-style: none;
     height: 70px;
-    padding: 10px 0;
+    padding: 10px 0px;
     transition: all .5s;
 }
 
 .sidebar ul li p {
     float: left;
-    margin-left: -15px;
+    margin-left: 15px;
 }
 
 .sidebar ul li span {
