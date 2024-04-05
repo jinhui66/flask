@@ -47,21 +47,20 @@
         
 </div>   
 <script>
-
     $(document).ready(function() {  
         $('#loginForm').on('submit', function(e) {  
             e.preventDefault();  // 阻止表单默认的提交行为 \
             var email = $("input[name='email']").val(); 
             var password = $("input[name='password']").val(); 
             var type = $("select[name='type']").val();
-            alert(type);
+
             $.ajax({  
                 url: '/login_action',  
                 method: 'POST',  
-                data: {email: email, password: password},
+                data: {type: type, email: email, password: password},
                 success: function(response) {  
                     if (response.status == 'success') {  
-                        alert("3");
+                        window.location.href = '/';
                     } else {
                         $('#password').val('');  // 清空输入框 
                         alert(response.message);  
