@@ -6,6 +6,7 @@
 
 {% block style %}
 <link rel='stylesheet' href='{{url_for('static',filename='/css/position_detail.css')}}'>
+<script src='{{url_for('static',filename='/js/jquery.min.js')}}'></script> 
 {% endblock %}
 
 {% block body %}
@@ -41,17 +42,16 @@
     <div class="row" style="margin-top: 20px;">  
 
         {% if g.user and g.type=='user'%}  
-            <form name="commentForm" action="/position_comment?keyword={{keyword}}&page={{page}}&position_id={{position_id}}" method="POST" class="comment">  
+            <form name="commentForm" class="comment" id="comment-form">  
                 <input type="hidden" name="keyword" value="{{keyword}}">  
-                <input type="hidden" name="page" value="{{page}}">  
                 <input type="hidden" name="position_id" value="{{position.id}}">  
-
+                <input type="hidden" name="page" value="{{page}}">  
                 <div class="comment-input">  
-                    <label for="content" style="font-size: 20px;">留言:</label>  
+                    <label style="font-size: 20px;">留言:</label>  
                     <input type="text" id="content" name="content" required>   
 
                 <class="submit-button">  
-                    <input type="submit"  value="留言">  
+                    <input type="submit" value="留言">  
                 </div>  
             </form>  
             
@@ -64,7 +64,7 @@
             <input type="hidden" name="page" value="{{page}}">  
         </form>
 
-        <ul class="position-ul2"> 
+        <ul class="position-ul2" id="comment-list"> 
             {% for comment in comments %}  
             <li>  
                 <div class="side-position2">  
@@ -84,4 +84,32 @@
         </ul>
 
 </div>
+<script>  
+    
+    $(document).ready(function() {  
+        alert('s')
+        $('#comment-form').on('submit', function(e) {  
+            e.preventDefault();  // 阻止表单默认的提交行为 \
+            var position_id = $("input[name='position_id']").val(); 
+            var content = $("input[name='content']").val(); 
+            $.ajax({  
+                url: '/add_comment',  
+                method: 'POST',  
+                data: {content: content, position_id: position_id},
+                success: function(response) {  
+                    if (response.status == 'success') {  
+                        comment = response.comment;
+                        $('#comment-list').append('<li>' + comment + '</li>');  
+                        $('#content').val('');  // 清空输入框  
+                    } else {  
+                        alert(response.message);  
+                    }  
+                },  
+                error: function(error) {  
+                    console.error(error);  
+                }  
+            });  
+        });  
+    });  
+</script> 
 {% endblock %}

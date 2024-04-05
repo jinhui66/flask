@@ -9,7 +9,7 @@ function bindEmailCaptchaClick(){
     // alert(email)
     $.ajax({
       // http://127.0.0.1:500
-      // /auth/captcha/email?email=xx@qq.com
+      // /captcha/email?email=xx@qq.com
       url: "/captcha/email?email="+email,
       method: "GET",
       success: function (result){
