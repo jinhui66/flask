@@ -16,8 +16,10 @@
     <h4 style="text-align: left;">上传简历</h4>
     <form name="form" method="POST" action="/upload" enctype="multipart/form-data">  
         <input type="file" name="file_name">  
+        <a href="data/resumes/{{resume.filepath}}">查看简历</a>
         <input type="submit" id="submit_button" value="上传">  
     </form> 
+    
     <br>
     <form name="form" action="/resume" method="POST"> 
         <h1 style="text-align: center;">个人简历</h1> 
