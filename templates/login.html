@@ -45,10 +45,21 @@
         <p><a href="/forgot_password">忘记密码?</a></p>
         <div id="errorMessage" class="error-message"></div>
 </div>   
-    <script>  
-        {% if error %} 
-            errorMessage.textContent = '邮箱或密码错误'; 
-        {% endif %} 
-    </script>  
+<script>
+    function checkPassword() {
+        const passwordInput = document.getElementById("password").value;
+        const correctPassword = "correct_password"; 
+
+        if (passwordInput === correctPassword) {
+            return true;
+        } else {
+            const errorMessageElement = document.getElementById("errorMessage");
+            errorMessageElement.textContent = "密码输入错误，请重试。";
+            return false;
+        }
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", checkPassword);
+</script>
 </body>
 {% endblock %}
