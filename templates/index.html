@@ -9,8 +9,10 @@
 {% block body %}
 <div id="pic" style="background-color: paleturquoise; ">
     <image src="./static/images/company.png" width="400px" height="100px" ></image>
-        <input class="search_text" type="search" placeholder="           请输入需要搜索的职位" aria-label="Search" name="keyword" value={{keyword}}>
+    <form action='/' method='GET'>
+        <input class="search_text" type="search" placeholder="请输入需要搜索的职位" aria-label="Search" name="keyword" value={{keyword}}>
         <input class ="search_button" type="submit" value="搜索">
+    </form>
 </div>
 <div class="sidebar">
     <ul>

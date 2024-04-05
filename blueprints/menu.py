@@ -148,6 +148,7 @@ def menu():
         return render_template('index.html',user=get_user,results=page_results,total_pages=total_pages,page=page) 
     if request.method == 'GET':
         keyword = request.args.get('keyword')
+
         if keyword==None:
             keyword=''
         results = redis_search_positions(keyword,Position)
