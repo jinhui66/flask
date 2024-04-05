@@ -47,7 +47,7 @@
         background-color:deepskyblue;
         margin-left: 20px;
         margin-top: 5px;"></div>
-    <form name="form" action="/user_info" method="POST">  
+    <form name="form" action="/user_info" method="POST" id="user-form">  
         <br><br>
         <div>  
             <label for="email">qq邮箱:  {{user.email}} (不可更改)</label>  
@@ -72,7 +72,30 @@
     <div class="triangle3"></div>
     <div class="triangle4"></div>
     </div>  
-<script>
-        errorMessage.textContent='{{error}}'
-</script>
+    <script>
+        $(document).ready(function() {  
+            $('#user-form').on('submit', function(e) {  
+                e.preventDefault();  // 阻止表单默认的提交行为 \
+
+                var username = $("input[name='username']").val(); 
+    
+                $.ajax({  
+                    url: '/username_action',  
+                    method: 'POST',  
+                    data: {username: username},
+                    success: function(response) {  
+                        if (response.status == 'success') {  
+                            $('username').val(response.username)
+                        } else {
+                            alert(response.message);  
+                        }  
+                    },  
+                    error: function(error) {  
+                        alert('error');
+                        console.error(error);  
+                    }  
+                });  
+            });  
+        });       
+    </script>
 {% endblock %}

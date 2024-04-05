@@ -5,6 +5,7 @@
 {% block style %}
     <link rel='stylesheet' href='{{url_for('static',filename='/css/register.css')}}'> 
     <script src='{{url_for('static',filename='/js/jquery.min.js')}}'></script> 
+    <script src='{{url_for('static',filename='/js/register.js')}}'> </script>
 {% endblock %}
 {% block body%}
 <body  class="container2">
@@ -24,7 +25,7 @@
 </div>
 <div class="register_container">
     <div class="tit">register</div>  
-    <form id="loginForm" action='/register' method='POST'> 
+    <form id="loginForm"> 
         <select id="type" name="type">  
             <option value="user">求职者</option>  
             <option value="admin">招聘者</option>  
@@ -54,13 +55,41 @@
             <input id="register" type="submit" value="注册">  
         </div>  
     </form>  
-    <form id="loginform" action="/">
-        <div id="errorMessage" class="error-message"></div>  
-    </form>
 </div>  
-<script src='{{url_for('static',filename='/js/register.js')}}'> </script>
-<script>  
-        errorMessage.textContent = '{{error}}';
-</script>  
+
+<script>
+    $(document).ready(function() {  
+
+        $('#loginForm').on('submit', function(e) {  
+            e.preventDefault();  // 阻止表单默认的提交行为 \
+            var type = $("select[name='type']").val();
+            var email = $("input[name='email']").val(); 
+            var captcha = $("input[name='captcha']").val();
+            var password = $("input[name='password']").val(); 
+            var password_confirm = $("input[name='password_confirm']").val(); 
+            var username = $("input[name='username']").val();
+
+            $.ajax({  
+                url: '/register_action',  
+                method: 'POST',  
+                data: {type: type, email: email, password: password, password_confirm: password_confirm, captcha: captcha, username: username},
+                success: function(response) {  
+                    if (response.status == 'success') {  
+                        window.location.href = '/login';
+                    } else {
+                        $('#password').val('');  // 清空输入框 
+                        $('#password_confirm').val('');  // 清空输入框 
+                        $('#captcha').val('');  // 清空输入框 
+                        alert(response.message);  
+                    }  
+                },  
+                error: function(error) {  
+                    alert('error');
+                    console.error(error);  
+                }  
+            });  
+        });  
+    });       
+</script>
 </body>
 {% endblock %}

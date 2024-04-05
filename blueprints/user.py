@@ -1,6 +1,6 @@
 from flask import Blueprint,url_for
 from flask_mail import Message
-from flask import request,render_template,session,redirect
+from flask import request,render_template,session,redirect,jsonify
 from exts import db,mail
 from models.table import User, Resume, Position, Comment, Send_resume, Admin
 from models.forms import ChangeForm
@@ -74,8 +74,15 @@ def resume():
         
 @bp.route('/user_info',methods=['POST','GET'])
 def user_info():
-    error=''
     if request.method=='GET':
+        return render_template('menu/user_info.html')
+    else:
+        pass
+        
+
+@bp.route('/username_action',methods=['GET','POST'])
+def username_action():
+    if request.method == 'GET':
         pass
     else:
         username = request.form.get('username')
@@ -89,9 +96,7 @@ def user_info():
             username = form.username.data
             user.username = username
             db.session.commit()
-            return render_template('menu/user_info.html')
-        elif user.username==username:
-            return render_template('menu/user_info.html')
+            return jsonify({'status':'success','message':''})
         else:
             for field, errors in form.errors.items():  
                 # errors 是一个列表，包含该字段的所有错误消息  
@@ -100,9 +105,7 @@ def user_info():
                     error = errors[0]
                     print(f"{field} 的第一个错误是: {errors[0]}")  
                     break
-                print(error)
-            return render_template('menu/user_info.html',error=error)
-    return render_template('menu/user_info.html')
+            return jsonify({'status':'','message':error})
 
 @bp.route('/send_resume',methods=['POST','GET'])
 def send_resume():
