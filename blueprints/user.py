@@ -6,6 +6,7 @@ from models.table import User, Resume, Position, Comment, Send_resume, Admin
 from models.forms import ChangeForm
 import os
 import shutil
+import base64
 
 # user
 bp = Blueprint('user',__name__,url_prefix="/")
@@ -16,6 +17,9 @@ def resume():
         if session:
             user_id = session.get('user_id')
             resume = Resume.query.filter_by(user_id=user_id).first()
+            resume.phone = base64.b64decode(resume.phone.encode('utf-8')).decode('utf-8')
+            resume.email = base64.b64decode(resume.email.encode('utf-8')).decode('utf-8')
+            print(resume.email)
             user = User.query.filter_by(id=session['user_id']).first()
             return render_template('menu/resume.html',resume=resume)
         else:
@@ -51,18 +55,18 @@ def resume():
             resume.gender = gender  
             resume.expect_position = expect_position
             resume.marriage = marriage
-            resume.phone = phone
+            resume.phone = base64.b64encode(phone.encode('utf-8'))
             resume.expect_salary = expect_salary
-            resume.email = email
+            resume.email = base64.b64encode(email.encode('utf-8'))
             resume.expect_address = expect_address
             resume.education = education
             resume.experience = experience
             resume.abilities = abilities
             resume.about_me = about_me
-            
-            
         # 提交
             db.session.commit()
+            resume.phone = base64.b64decode(resume.phone.encode('utf-8')).decode('utf-8')
+            resume.email = base64.b64decode(resume.email.encode('utf-8')).decode('utf-8')
             return render_template('menu/resume.html',resume=resume)
         else:
             return('失败')

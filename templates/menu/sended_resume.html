@@ -36,6 +36,9 @@
                             {% else %}
                                 出错! '不明确'
                             {% endif %}
+                            {% if sended_resume.position.public == 0%}
+                                招聘已截止
+                            {% endif %}
                             <span class="position-author"></span>   
                             <span class="position-time">{{sended_resume.send_time}}</span>  
                             
