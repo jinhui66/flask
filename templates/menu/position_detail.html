@@ -87,25 +87,25 @@
 <script>  
     
     $(document).ready(function() {  
-        alert('s')
         $('#comment-form').on('submit', function(e) {  
             e.preventDefault();  // 阻止表单默认的提交行为 \
             var position_id = $("input[name='position_id']").val(); 
             var content = $("input[name='content']").val(); 
+
             $.ajax({  
                 url: '/add_comment',  
                 method: 'POST',  
                 data: {content: content, position_id: position_id},
                 success: function(response) {  
                     if (response.status == 'success') {  
-                        comment = response.comment;
-                        $('#comment-list').append('<li>' + comment + '</li>');  
+                        location.reload();      //刷新
                         $('#content').val('');  // 清空输入框  
                     } else {  
                         alert(response.message);  
                     }  
                 },  
                 error: function(error) {  
+                    alert('error');
                     console.error(error);  
                 }  
             });  

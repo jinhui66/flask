@@ -46,7 +46,6 @@ def position_detail():
 @bp.route('/add_comment',methods=['GET','POST'])
 def add_comment():
     if request.method == 'GET':
-        print('1')
         pass
     else:
         print('成功')
@@ -56,4 +55,4 @@ def add_comment():
         comment = Comment(content=content,position_id=position_id,user_id=user_id)
         db.session.add(comment)
         db.session.commit()
-        return jsonify({'status':'success','message':'comment successfully','comment':comment})
+        return jsonify({'status':'success','message':'comment successfully'})
