@@ -24,9 +24,9 @@ class Resume(db.Model):
     expect_position = db.Column(db.String(30), nullable=True)
     gender = db.Column(db.String(30), nullable=True)
     marriage = db.Column(db.String(5), nullable=True)
-    phone = db.Column(db.String(15), nullable=True)
+    phone = db.Column(db.Text(), nullable=True)
     expect_salary = db.Column(db.Integer, nullable=True)
-    email = db.Column(db.String(35), nullable=True)
+    email = db.Column(db.Text(), nullable=True)
     expect_address = db.Column(db.String(30), nullable=True)
     
     education = db.Column(db.Text, nullable=True)
@@ -96,9 +96,9 @@ class Send_resume(db.Model):
     expect_position = db.Column(db.String(30), nullable=True)
     gender = db.Column(db.String(30), nullable=True)
     marriage = db.Column(db.String(5), nullable=True)
-    phone = db.Column(db.String(15), nullable=True)
+    phone = db.Column(db.Text(), nullable=True)
     expect_salary = db.Column(db.Integer, nullable=True)
-    email = db.Column(db.String(35), nullable=True)
+    email = db.Column(db.Text(), nullable=True)
     expect_address = db.Column(db.String(30), nullable=True)
     
     education = db.Column(db.Text, nullable=True)

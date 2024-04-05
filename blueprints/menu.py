@@ -9,13 +9,11 @@ import hashlib
 import json
 from models.forms import RegisterForm,LoginForm,ForgotForm
 from models.function import get_total_pages, redis_search_positions
+import base64
 import os
 
 bp = Blueprint('menu',__name__,url_prefix="/")
 
-# @bp.route('/',methods=['GET','POST'])
-# def main():
-#     return render_template('index.html')
 @bp.route('/login',methods=['GET','POST'])
 def login():
     if request.method=='GET':
@@ -23,13 +21,10 @@ def login():
     if request.method=='POST':
         type = request.form.get('type')
         form = LoginForm(request.form)
-        print(1)
         if form.validate():
-            print(2)
             email = form.email.data
             password = form.password.data
             if type == 'user':
-                print(3)
                 get_user = User.query.filter_by(email=email).first()
                 if get_user is not None:
                     session['user_id'] = get_user.id
@@ -38,7 +33,6 @@ def login():
                     if(get_user.password == password):
                         return redirect(url_for('menu.menu'))
             else:
-                print(4)
                 get_admin = Admin.query.filter_by(email=email).first()
                 if get_admin is not None:
                     session['user_id'] = get_admin.id
