@@ -5,6 +5,9 @@
 {% endblock %}
 {% block style %}
 <link rel="stylesheet" href="{{url_for('static',filename='/css/index.css')}}">
+<script src="
+https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js
+"></script>
 {% endblock %}
 {% block body %}
 <div id="pic" style="background-color: paleturquoise; ">
@@ -31,7 +34,7 @@
                 <a class="job" target="_blank" href="">java</a>
                 <a class="job" target="_blank" href="">C/C++</a>
                 <a class="job" target="_blank" href="">PHP</a>
-                <a class="job" target="_blank" href="">Python</a>
+                <a class="job" target="_blank" href="">Python</a><br>
                 <a class="job" target="_blank" href="">Golang</a>
                 <a class="job" target="_blank" href="">C#</a>
                 </div>
@@ -91,13 +94,77 @@
                 </div>
             </div>
         </li>
+        <li>
+            <p class="side">通信</p>
+            <span>></span>
+            <div class="sidebar-mask">
+                <div>
+                    <label class="lab">通信</label>
+                </div>
+                <br>
+                <div class="inside">
+                <a class="job" target="_blank" href="">移动通信工程师</a>
+                <a class="job" target="_blank" href="">5G网络优化</a>
+                <a class="job" target="_blank" href="">网络通信技术</a>
+                <a class="job" target="_blank" href="">通信资料员</a>
+                <a class="job" target="_blank" href="">通信施工</a>
+                <a class="job" target="_blank" href="">通信项目助理</a>
+                </div>
+            </div>
+        </li>
     </ul>
+    <div class="side-image">
+    <img src="./static/images/advertise.png" alt="广告" class="adver">
+    </div>
 </div>
-
 <br><br>
-<div style="height: 300px;">
+<div style="height: 450px;">
     <h2>个人评估</h2>
-</div>
+      <br>
+    <div id="chart" style="width: 500px; height: 400px;position: relative;left: 350px; background-color: rgb(206, 231, 246);border-radius: 5%;"></div>
+    <script>
+      var chart = echarts.init(document.getElementById('chart'));
+      var option = {
+        title: {
+          text: '个人评估',
+          x: 'center',
+          textStyle: {
+                    color: '#000000' // 将文本颜色设置为黑色
+                }
+        },
+        tooltip: {},
+        legend: {
+          data: ['产品A']
+        },
+        radar: {
+          indicator: [
+            {name:'动手能力', max:100},
+            {name:'创新能力', max:100},
+            {name:'工作经验', max:100},
+            {name:'人物性格', max:100},
+            {name:'未来规划', max:100}
+          ],
+          name:
+          {
+            textStyle: {
+                color: '#000000' 
+            }
+          }
+        },
+        areaStyle:{},
+        series: [{
+          type: 'radar',
+          data: [
+            {
+              value: [80,80,60,85,60],
+            },
+  
+          ]
+        }]
+      };
+      chart.setOption(option);
+    </script>
+  </div>
 <br><br>
 <div>
     <h2>推荐岗位
