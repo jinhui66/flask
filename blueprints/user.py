@@ -96,7 +96,7 @@ def username_action():
             username = form.username.data
             user.username = username
             db.session.commit()
-            return jsonify({'status':'success','username':user.username})
+            return jsonify({'status':'success','username':user.username,'message':'修改用户名成功'})
         else:
             for field, errors in form.errors.items():  
                 # errors 是一个列表，包含该字段的所有错误消息  
@@ -105,7 +105,7 @@ def username_action():
                     error = errors[0]
                     print(f"{field} 的第一个错误是: {errors[0]}")  
                     break
-            return jsonify({'status':'','message':error})
+            return jsonify({'status':'','message':error,'username':user.username})
 
 @bp.route('/send_resume',methods=['POST','GET'])
 def send_resume():
