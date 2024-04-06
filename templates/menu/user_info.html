@@ -32,7 +32,7 @@
         margin-top: 5px;"></div>
         <br>
     
-    <form name="form" method="POST" action="/upload_pic" enctype="multipart/form-data">  
+    <form name="form" id='upload-form' enctype="multipart/form-data">  
         <input type="file" name="file_name">  
         <input type="submit" value="上传" id="post"> 
         <div>  
@@ -75,19 +75,39 @@
     </div>  
     <script>
         $(document).ready(function() {  
-            alert('1')
             $('#user-form').on('submit', function(e) {  
                 e.preventDefault();  // 阻止表单默认的提交行为 \
                 var username = $("input[name='username']").val(); 
-    
                 $.ajax({  
                     url: '/username_action',  
                     method: 'POST',  
                     data: {username: username},
                     success: function(response) {  
                         if (response.status == 'success') {  
-                            $('#username').val(response.username)
-                            alert('修改用户名成功')  
+                            $('#username').val(response.username);
+                            alert('修改用户名成功') ;
+                        } else {
+                            alert(response.message);  
+                        }  
+                    },  
+                    error: function(error) {  
+                        alert('error');
+                        console.error(error);  
+                    }  
+                });  
+            });  
+            alert('1')
+            $('#upload-form').on('submit', function(e) {  
+                e.preventDefault();  // 阻止表单默认的提交行为 \
+                var fileInput = $("input[type='file']"); // 获取文件输入元素  
+                var file = fileInput[0].files[0]; // 获取用户选择的文件  
+                $.ajax({  
+                    url: '/upload_pic',  
+                    method: 'POST',  
+                    data: {file: file},
+                    success: function(response) {  
+                        if (response.status == 'success') {  
+                            alert(response.message);
                         } else {
                             alert(response.message);  
                         }  

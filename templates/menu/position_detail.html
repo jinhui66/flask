@@ -31,7 +31,7 @@
         </ul>
     </div>
     {% if g.user and g.type=='user' %} 
-        <center><form action='/send_resume' method='POST'>
+        <center><form id='send-form'>
             <input type="hidden" name="position_id" value="{{position.id}}">
             <input type="submit" class="resume" value="投递简历"> 
         </form></center>
@@ -89,6 +89,7 @@
     $(document).ready(function() {  
         $('#comment-form').on('submit', function(e) {  
             e.preventDefault();  // 阻止表单默认的提交行为 \
+
             var position_id = $("input[name='position_id']").val(); 
             var content = $("input[name='content']").val(); 
 
@@ -110,6 +111,28 @@
                 }  
             });  
         });  
+
+        $('#send-form').on('submit', function(e) {  
+            e.preventDefault();  // 阻止表单默认的提交行为 \
+            var position_id = $("input[name='position_id']").val(); 
+            
+            $.ajax({  
+                url: '/send_resume',  
+                method: 'POST',  
+                data: {position_id: position_id},
+                success: function(response) {  
+                    if (response.status == 'success') {  
+                        alert(response.message);
+                    } else {  
+                        alert(response.message);  
+                    }  
+                },  
+                error: function(error) {  
+                    alert('error');
+                    console.error(error);  
+                }  
+            });  
+        }); 
     });  
 </script> 
 {% endblock %}

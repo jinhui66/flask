@@ -118,7 +118,7 @@ def send_resume():
             os.mkdir(f'data/send_resumes/{position_id}/{user_id}')
         
         if resume.filepath == '' or not os.path.exists(f'data/resumes/{resume.filepath}'):
-            return '请上传简历'
+            return jsonify({'status':'','message':'请先上传简历'})
             
         filepath = f'data/send_resumes/{position_id}/' + resume.filepath
         shutil.copy(f'data/resumes/{resume.filepath}',filepath)
@@ -166,7 +166,7 @@ def send_resume():
             db.session.add(send)
         db.session.commit()
         
-    return redirect(url_for('menu.menu'))
+    return jsonify({'status':'success','message':'投递成功'})
 
 # 查看已投简历
 @bp.route('/sended_resume')
