@@ -84,6 +84,7 @@
                     data: {username: username},
                     success: function(response) {  
                         $('#username').val(response.username);
+                        location.reload(); 
                         alert(response.message) ;
                     },  
                     error: function(error) {  
