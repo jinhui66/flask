@@ -6,6 +6,7 @@
 
 {% block style %}
     <link rel='stylesheet' href='{{url_for('static',filename='/css/resume.css')}}'>
+    <script src='{{url_for('static',filename='/js/jquery.min.js')}}'></script> 
     <link rel='stylesheet' href='{{url_for('static',filename='/css/login.css')}}'>
     <style>
         #post
@@ -31,7 +32,7 @@
         margin-top: 5px;"></div>
         <br>
     
-    <form name="form" method="POST" action="/upload_pic" enctype="multipart/form-data">  
+    <form name="form" id='upload-form' enctype="multipart/form-data" action='/upload_pic' method='POST'>  
         <input type="file" name="file_name">  
         <input type="submit" value="上传" id="post"> 
         <div>  
@@ -47,7 +48,7 @@
         background-color:deepskyblue;
         margin-left: 20px;
         margin-top: 5px;"></div>
-    <form name="form" action="/user_info" method="POST">  
+    <form name="form" id="user-form">  
         <br><br>
         <div>  
             <label for="email">qq邮箱:  {{user.email}} (不可更改)</label>  
@@ -72,7 +73,26 @@
     <div class="triangle3"></div>
     <div class="triangle4"></div>
     </div>  
-<script>
-        errorMessage.textContent='{{error}}'
-</script>
+    <script>
+        $(document).ready(function() {  
+            $('#user-form').on('submit', function(e) {  
+                e.preventDefault();  // 阻止表单默认的提交行为 \
+                var username = $("input[name='username']").val(); 
+                $.ajax({  
+                    url: '/username_action',  
+                    method: 'POST',  
+                    data: {username: username},
+                    success: function(response) {  
+                        $('#username').val(response.username);
+                        location.reload(); 
+                        alert(response.message) ;
+                    },  
+                    error: function(error) {  
+                        alert('error');
+                        console.error(error);  
+                    }  
+                });  
+            });  
+        });       
+    </script>
 {% endblock %}

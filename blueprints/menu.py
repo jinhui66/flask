@@ -1,5 +1,5 @@
 from flask import Blueprint
-from flask import Flask,request,render_template,session,redirect,url_for   #g 可以存储全局变量
+from flask import Flask,request,render_template,session,redirect,url_for,jsonify   #g 可以存储全局变量
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from redis import Redis
@@ -17,8 +17,15 @@ bp = Blueprint('menu',__name__,url_prefix="/")
 @bp.route('/login',methods=['GET','POST'])
 def login():
     if request.method=='GET':
-        return render_template('login.html',error=0)
+        return render_template('login.html')
     if request.method=='POST':
+        pass
+    
+@bp.route('/login_action',methods=['GET','POST'])
+def login_action():
+    if request.method == 'GET':
+        pass
+    else:
         type = request.form.get('type')
         form = LoginForm(request.form)
         if form.validate():
@@ -30,29 +37,42 @@ def login():
                     session['user_id'] = get_user.id
                     session['type'] = 'user'
                     password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+                    print(password)
                     if(get_user.password == password):
-                        return redirect(url_for('menu.menu'))
+                        print(1)
+                        return jsonify({'status':'success', 'message':''})
+                        
             else:
+                print('admin')
                 get_admin = Admin.query.filter_by(email=email).first()
                 if get_admin is not None:
                     session['user_id'] = get_admin.id
                     session['type'] = 'admin'
                     password = hashlib.sha256(password.encode('utf-8')).hexdigest()
                     if(get_admin.password == password):
-                        return redirect(url_for('menu.menu'))
-        return render_template('login.html',error=1)
+                        return jsonify({'status': 'success', 'message':''})
+        return jsonify({'status':'', 'message':'账号或密码错误'})
 
 @bp.route('/register',methods=['GET','POST'])
 def register():
-    error=None
     if request.method == 'GET':
         return render_template('register.html')
     else:
+        pass
+        
+
+@bp.route('/register_action',methods=['GET','POST'])
+def register_action():
+    if request.method == 'GET':
+        pass
+    else:
         type = request.form.get('type')
         form = RegisterForm(request.form)
+        print(form.username.data)
         if form.validate():
             email = form.email.data
             username = form.username.data
+            print(username)
             password = form.password.data
             if type == 'user':
                 user = User(email=email,username=username,password=hashlib.sha256(password.encode('utf-8')).hexdigest())
@@ -81,14 +101,14 @@ def register():
                 if not os.path.exists('data/resumes/'+str(user.id)):  
                     os.makedirs('data/resumes/'+str(user.id))  
                 
-                return redirect(url_for('menu.login'))
+                return jsonify({'status': 'success'})
             else: #type == 'admin'
                 admin = Admin(email=email,username=username,password=hashlib.sha256(password.encode('utf-8')).hexdigest())
                 db.session.add(admin)
                 db.session.commit()
                 if not os.path.exists('data/pictures/admin/'+str(admin.id)):  
                     os.makedirs('data/pictures/admin/'+str(admin.id))  
-                return redirect(url_for('menu.login'))
+                return jsonify({'status': 'success'})
         else:
             for field, errors in form.errors.items():  
                 # errors 是一个列表，包含该字段的所有错误消息  
@@ -98,8 +118,8 @@ def register():
                     print(f"{field} 的第一个错误是: {errors[0]}")  
                     break
                 print(error)
-            return render_template('register.html',error=error)
-
+            return jsonify({'status': '','message':error})
+        
 @bp.route('/forgot_password',methods=['GET','POST'])
 def forgot_password():
     if request.method == 'GET':
