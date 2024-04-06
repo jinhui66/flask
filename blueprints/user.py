@@ -96,7 +96,7 @@ def username_action():
             username = form.username.data
             user.username = username
             db.session.commit()
-            return jsonify({'status':'success','message':''})
+            return jsonify({'status':'success','username':user.username})
         else:
             for field, errors in form.errors.items():  
                 # errors 是一个列表，包含该字段的所有错误消息  
