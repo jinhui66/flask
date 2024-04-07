@@ -256,10 +256,13 @@ body{
 {
     display: block;
     border-radius: 5%;
+    background-color: red;
+    height: 0px;
 }
 
-.sidebar:hover .side-image {
+.sidebar ul:hover .side-image {
     display: none;
+    transition-delay: 1s;
 }
 
 .adver
@@ -267,7 +270,7 @@ body{
     height: 560px;
     width: auto;
     position: relative;
-    top: -560px;
+    top: -400px;
     left: 210px;
     border-radius: 5%;
 }
