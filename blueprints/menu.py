@@ -154,6 +154,7 @@ def menu():
     if request.method == 'POST':
         keyword = ''
         get_user = User.query.filter_by(id=session['user_id']).first()
+        # results = Position.query.filter_by(Position)
         results = redis_search_positions(keyword,Position)
         results_per_page = 6  # 每页显示6条结果  
         page = int(request.form.get('page', 1))  # 获取当前页码，默认为1 
@@ -162,7 +163,6 @@ def menu():
         return render_template('index.html',user=get_user,results=page_results,total_pages=total_pages,page=page) 
     if request.method == 'GET':
         keyword = request.args.get('keyword')
-
         if keyword==None:
             keyword=''
         results = redis_search_positions(keyword,Position)
@@ -171,7 +171,6 @@ def menu():
         page_results, total_pages = get_total_pages(results,results_per_page,page)
         
         return render_template('index.html',results=page_results,keyword=keyword,total_pages=total_pages,page=page)
-
 
 
 @bp.route('/logout',methods=['GET','POST'])

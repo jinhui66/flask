@@ -3,6 +3,7 @@ from exts import db,mail,xtredis
 import json
 from models.forms import RegisterForm,LoginForm,ForgotForm
 from datetime import datetime, date
+from sqlalchemy import or_
 import fitz # pip install PyMuPDF
 
 def get_total_pages(results,results_per_page,page):
@@ -24,7 +25,11 @@ def redis_search_positions(keyword,Position):
         if keyword==None:
             results = Position.query.all()
         else:
-            results = Position.query.filter(Position.position_name.like(f'%{keyword}%')).all()
+            results = Position.query.filter(
+                or_(Position.position_name.like(f'%{keyword}%'),
+                    Position.description.like(f'%{keyword}%'))
+                ).all()
+
 
         results_data = []
         for result in results:
