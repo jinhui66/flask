@@ -17,3 +17,5 @@ MAIL_PORT = 587
 MAIL_USERNAME = "1@qq.com"
 MAIL_PASSWORD = "qsdsugwiquodig**"
 MAIL_DEFAULT_SENDER = "@qq.com"
+
+API_KEY = ''
