@@ -1,0 +1,66 @@
+<!-- 查看招聘信息>收到的简历  !-->
+{% extends 'base.html' %}
+
+{% block title %}
+查看收到的简历
+{% endblock %}
+
+{% block style %}
+<link rel='stylesheet' href='{{url_for('static',filename='/css/recruit_info.css')}}'>
+{% endblock %}
+
+{% block body%}
+<div class="col-10">  
+    {% if resumes %}
+    <ul class="position-ul">    
+        {% for resume in resumes%}
+        <li>  
+            <div class="side-position">  
+                <img class="side-position-avatar" src="data/pictures/user/{{resume.user.filepath}}" alt="">  
+            </div>  
+            <div class="position-main">  
+                <div class="position-text1"><p class="text">姓名: &nbsp;&nbsp;{{resume.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;性别: &nbsp;&nbsp;{{resume.gender}}</p></div>
+                <div class="position-text1"><p class="text">年龄: &nbsp;&nbsp;{{resume.age}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;期望职位: &nbsp;&nbsp;{{resume.expect_position}}</p></div>  
+                <div class="position-text1"><p class="text">婚姻状况: &nbsp;&nbsp;{{resume.marriage}}&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;期望月薪: &nbsp;&nbsp;{{resume.expect_salary}}</p></div> 
+                <div class="position-text1"><p class="text">学历: &nbsp;&nbsp;{{resume.education}}</p></div> 
+                <div class="position-text1"><p class="text">能力: &nbsp;&nbsp;{{resume.abilities}}</p></div> 
+                <div class="position-text1"><p class="text">工作经验: &nbsp;&nbsp;{{resume.experience}}</p></div> 
+                <div class="position-text1"><p class="text">自我评价: {{resume.about_me}}</p></div> 
+                <div class="position-detail">  
+                    {% if resume.status == 'waiting' %}
+                        待回复
+                    {% elif resume.status == 'accept' %}
+                        已接收
+                    {% elif resume.status == 'refuse' %}
+                        已拒绝
+                    {% endif %}
+                    <div style="display: flex; align-items: center;justify-content: space-around;">
+                    <span class="position-author">
+                        <form name="form" action="/accept_action" method="POST" >  
+                            <input type='hidden' name='send_resume_id' value='{{resume.id}}'>
+                            <input type='submit' value='通过'>
+                        </form>
+                    </span>  
+                    <span class="position-time">
+                        <form name="form" action="/refuse_action" method="POST" >  
+                            <input type='hidden' name='send_resume_id' value='{{resume.id}}'>
+                            <input type='submit' value='拒接'>
+                        </form>
+                    </span>  
+                    </div>
+                </div>  
+            </div>
+            <a href="data/send_resumes/{{resume.position_id}}/{{resume.filepath}}">下载简历</a>
+
+            
+
+            
+
+        </li>  
+        {% endfor %}
+    </ul>
+    {% else %}
+        无投递简历
+    {% endif %}
+</div>
+{% endblock %}

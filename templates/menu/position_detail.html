@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block title %}
+详细信息
+{% endblock %}
+
+{% block style %}
+<link rel='stylesheet' href='{{url_for('static',filename='/css/position_detail.css')}}'>
+<script src='{{url_for('static',filename='/js/jquery.min.js')}}'></script> 
+{% endblock %}
+
+{% block body %}
+<div class="position_container">  
+    <div class="row" style="margin-top: 20px;">  
+        <ul class="position-ul1">  
+            <li>  
+                <div class="side-position">  
+                    <img class="side-position-avatar" src="data/pictures/admin/{{position.admin.filepath}}" alt="">  
+                </div>  
+                <div class="position-main">  
+                    <div class="position-title-detail">公司名称: {{position.company}}</div>  
+                    <div class="position-content-detail">
+                        <b>职位: </b>{{position.position_name}}<br>
+                        <b>月薪: </b>{{position.salary}}<br>
+                        <b>最低学历: </b>{{position.education}}<br>
+                        <b>说明: </b>{{position.description}}    <br>
+                        <b>地址: </b>{{position.address}}    <br>
+                    </div>  
+                </div>  
+            </li> 
+        </ul>
+    </div>
+    {% if g.user and g.type=='user' %} 
+        <center><form id='send-form'>
+            <input type="hidden" name="position_id" value="{{position.id}}">
+            <input type="submit" class="resume" value="投递简历"> 
+        </form></center>
+    {% endif %} 
+</div>
+<br><br>
+<div class='comment_container'>
+    <div class="row" style="margin-top: 20px;">  
+
+        {% if g.user and g.type=='user'%}  
+            <form name="commentForm" class="comment" id="comment-form">  
+                <input type="hidden" name="keyword" value="{{keyword}}">  
+                <input type="hidden" name="position_id" value="{{position.id}}">  
+                <input type="hidden" name="page" value="{{page}}">  
+                <div class="comment-input">  
+                    <label style="font-size: 20px;">留言:</label>  
+                    <input type="text" id="content" name="content" required>   
+
+                <class="submit-button">  
+                    <input type="submit" value="留言">  
+                </div>  
+            </form>  
+            
+        {% endif %}  
+        <br>
+        </div>
+
+        <form name="returnForm" action="/?keyword={{keyword}}&page={{page}}" method="GET">  
+            <input type="hidden" name="keyword" value="{{keyword}}">  
+            <input type="hidden" name="page" value="{{page}}">  
+        </form>
+
+        <ul class="position-ul2" id="comment-list"> 
+            {% for comment in comments %}  
+            <li>  
+                <div class="side-position2">  
+                    <img class="side-position2-avatar" src="data/pictures/user/{{comment.user.filepath}}">  
+                </div>  
+                <div class="position-main">  
+                    <div class="position-title" style="color: rgb(111, 190, 222);">{{comment.user.username}}</a></div>  
+                    <div class="position-content">{{comment.content}}</div>  
+                    <div class="position-detail">  
+                        <span class="position-author"></span>  
+                        <span class="position-time">{{comment.time}}</span>  
+                    </div>  
+                </div>  
+            </li>  
+            <br>
+            {% endfor %} 
+        </ul>
+
+</div>
+<script>  
+    
+    $(document).ready(function() {  
+        $('#comment-form').on('submit', function(e) {  
+            e.preventDefault();  // 阻止表单默认的提交行为 \
+
+            var position_id = $("input[name='position_id']").val(); 
+            var content = $("input[name='content']").val(); 
+
+            $.ajax({  
+                url: '/add_comment',  
+                method: 'POST',  
+                data: {content: content, position_id: position_id},
+                success: function(response) {  
+                    if (response.status == 'success') {  
+                        location.reload();      //刷新
+                        $('#content').val('');  // 清空输入框  
+                    } else {  
+                        alert(response.message);  
+                    }  
+                },  
+                error: function(error) {  
+                    alert('error');
+                    console.error(error);  
+                }  
+            });  
+        });  
+
+        $('#send-form').on('submit', function(e) {  
+            e.preventDefault();  // 阻止表单默认的提交行为 \
+            var position_id = $("input[name='position_id']").val(); 
+            
+            $.ajax({  
+                url: '/send_resume',  
+                method: 'POST',  
+                data: {position_id: position_id},
+                success: function(response) {  
+                    if (response.status == 'success') {  
+                        alert(response.message);
+                    } else {  
+                        alert(response.message);  
+                    }  
+                },  
+                error: function(error) {  
+                    alert('error');
+                    console.error(error);  
+                }  
+            });  
+        }); 
+    });  
+</script> 
+{% endblock %}

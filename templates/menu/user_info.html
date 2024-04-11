@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}
+用户信息
+{% endblock %}
+
+{% block style %}
+    <link rel='stylesheet' href='{{url_for('static',filename='/css/resume.css')}}'>
+    <script src='{{url_for('static',filename='/js/jquery.min.js')}}'></script> 
+    <link rel='stylesheet' href='{{url_for('static',filename='/css/login.css')}}'>
+    <style>
+        #post
+        {
+            border-bottom: 1px lightblue solid;
+        }
+    </style> 
+{% endblock %}
+
+{% block body %}
+<div class="resume_container" style="position: absolute;
+                                    top: 8%;
+                                    left: 20%;"> 
+    <div class="triangle1"></div>
+    <div class="triangle2"></div>
+    <h1 style="text-align: center;">个人界面</h1>
+    <br>
+    <h2 style="text-align: left; color: dodgerblue;">更改头像</h2>
+        <div class="a2" style="height: 2px;
+        width: 100%;
+        background-color:deepskyblue;
+        margin-left: 20px;
+        margin-top: 5px;"></div>
+        <br>
+    
+    <form name="form" id='upload-form' enctype="multipart/form-data" action='/upload_pic' method='POST'>  
+        <input type="file" name="file_name">  
+        <input type="submit" value="上传" id="post"> 
+        <div>  
+            <img class="side-position-avatar" src="data/pictures/{{g.type}}/{{user.filepath}}" alt="" style="position: relative;
+            left: 20%;width: 10%;height: 10%;">  
+        </div>   
+    </form> 
+    <br>
+    <br>
+    <h2 style="text-align: left; color: dodgerblue;">个人信息</h2>
+        <div class="a2" style="height: 2px;
+        width: 100%;
+        background-color:deepskyblue;
+        margin-left: 20px;
+        margin-top: 5px;"></div>
+    <form name="form" id="user-form">  
+        <br><br>
+        <div>  
+            <label for="email">qq邮箱:  {{user.email}} (不可更改)</label>  
+        </div>  
+        <br>
+        <div>  
+            <label for="username">用户名(长度 3-20) :</label>  
+            <input type="text" id="username" name="username" value="{{user.username}}" style="width: 300px;position: relative;left: 5%;">  
+            <input type="submit" value="保存" style="position: absolute; left: 65%;">
+        </div>  
+    <center>
+        <br> 
+    </form>  
+    
+    <form name="form" action="/" method="GET">  
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <input type="submit" value="返回" style="margin-right: 10px;">
+            <p><a href='/forgot_password' style="padding: 10px 20px; background-color: rgb(35, 150, 196); color: white; border: none; border-radius: 4px; cursor: pointer; text-decoration: none;vertical-align: -13px; height: 10px;">更改密码</a></p>
+        </div>  
+    </form>
+    <div id="errorMessage" class="error-message"></div>  
+    <div class="triangle3"></div>
+    <div class="triangle4"></div>
+    </div>  
+    <script>
+        $(document).ready(function() {  
+            $('#user-form').on('submit', function(e) {  
+                e.preventDefault();  // 阻止表单默认的提交行为 \
+                var username = $("input[name='username']").val(); 
+                $.ajax({  
+                    url: '/username_action',  
+                    method: 'POST',  
+                    data: {username: username},
+                    success: function(response) {  
+                        $('#username').val(response.username);
+                        location.reload(); 
+                        alert(response.message) ;
+                    },  
+                    error: function(error) {  
+                        alert('error');
+                        console.error(error);  
+                    }  
+                });  
+            });  
+        });       
+    </script>
+{% endblock %}

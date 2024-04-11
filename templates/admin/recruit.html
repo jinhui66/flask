@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+总览信息
+{% endblock %}
+
+{% block style %}
+<link rel='stylesheet' href='{{url_for('static',filename='/css/recruit.css')}}'>
+{%endblock%}
+
+{% block body%}
+<div class="container">  
+    <form action='recruit_release' method='POST'>
+        <input class="publish" type='submit' value='发布招聘' >
+    </form>
+    <div class="row" style="margin-top: 20px;"> 
+        <p>已发布的招聘信息 </p>
+        <div class="col-10">  
+            {% if released_positions %}  
+            <ul class="position-ul">  
+                {% for position in released_positions %}  
+                <li>  
+                    <div class="side-position">  
+                        <img class="side-position-avatar" src="data/pictures/admin/{{position.admin.filepath}}" >  
+                    </div>  
+                    <div class="position-main">  
+                        <div class="position-title">职位名称:{{position.position_name}}</div> 
+                        <div class="position-content"><span>公司: {{position.company}}</span><br><span>月薪:{{position.salary}}</span>
+                        <br>学历要求:{{position.education}}<br>地址:{{position.address}}<br>补充说明:{{position.description}}</div>  
+                        <div class="position-detail"> 
+                            <span class="position-time">{{position.release_time}}</span>  
+                        </div>  
+                        <div style="display: flex; align-items: center;">
+                            <form action='/recruit_info_action' method='POST' style="margin-right: 10px;">
+                                <input type='hidden' name='position_id' value='{{position.id}}'>
+                                <input type='submit' value='查看投递简历'>
+                            </form>
+                        
+                            {% if position.public == 1 %}
+                                <form action='/stop_recruit' method='POST'>
+                                    <input type='hidden' name='position_id' value='{{position.id}}'>
+                                    <button style="width: 140px; height: 45px; background-color: rgb(35, 150, 196); color: white; outline: none; border: none; border-radius: 5%;">截止招聘</button>
+                                </form>
+                            {% endif %}
+
+                            {% if position.public == 0 %}
+                                <label style="width: 300px; position: relative; left: -150px; font-size: 20px;">招聘已截止</label>
+                            {% endif %}
+                        </div>
+                    </div>  
+                    
+                </li>  
+                <br>
+                {% endfor %}  
+            </ul>  
+            {% else %}
+            无
+            {% endif %}  
+        </div>
+    </div>
+</div>
+{% endblock %}
