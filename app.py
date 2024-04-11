@@ -8,6 +8,7 @@ from blueprints.position import bp as position_bp
 from blueprints.email import bp as email_bp
 from blueprints.admin import bp as admin_bp
 from blueprints.load import bp as load_bp
+from blueprints.api import bp as api_bp
 from models.table import User, Admin, Position
 import os
 # import torch
@@ -50,6 +51,7 @@ app.register_blueprint(position_bp)
 app.register_blueprint(email_bp)
 app.register_blueprint(admin_bp)
 app.register_blueprint(load_bp)
+app.register_blueprint(api_bp)
 
 #建表
 with app.app_context():
