@@ -2,7 +2,7 @@ from flask import Blueprint,url_for
 from flask_mail import Message
 from flask import request,render_template,session,redirect
 from exts import db,mail
-from models.table import User, Resume, Position, Comment, Send_resume, Admin
+from models.table import Position, Send_resume
 import os
 
 # admin

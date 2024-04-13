@@ -78,7 +78,6 @@ def user_info():
         return render_template('menu/user_info.html')
     else:
         pass
-        
 
 @bp.route('/username_action',methods=['GET','POST'])
 def username_action():
@@ -181,3 +180,10 @@ def sended_resume():
         for send_resume in resumes:
             sended_resumes.append(send_resume)
         return render_template('menu/sended_resume.html',sended_resumes=sended_resumes)
+    
+@bp.route('/tuijian')
+def tuijian():
+    if request.method == 'GET':
+        pass
+    else:
+        pass

@@ -7,6 +7,6 @@ import openai
 
 bp = Blueprint('api',__name__,url_prefix="/")
 
-@bp.route('/chat_api',methods=['GET','POST'])
-def chat_api():
-    openai.api_key = key
+# @bp.route('/chat_api',methods=['GET','POST'])
+# def chat_api():
+#     openai.api_key = key

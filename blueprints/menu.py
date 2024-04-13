@@ -9,7 +9,6 @@ import hashlib
 import json
 from models.forms import RegisterForm,LoginForm,ForgotForm
 from models.function import get_total_pages, redis_search_positions
-import base64
 import os
 
 bp = Blueprint('menu',__name__,url_prefix="/")
