@@ -7,6 +7,7 @@ from models.forms import ChangeForm
 import os
 import shutil
 import base64
+import time
 
 # user
 bp = Blueprint('user',__name__,url_prefix="/")
@@ -168,7 +169,7 @@ def send_resume():
     return jsonify({'status':'success','message':'投递成功'})
 
 # 查看已投简历
-@bp.route('/sended_resume')
+@bp.route('/sended_resume',methods=['POST','GET'])
 def sended_resume():
     if request.method == 'POST':
         user_id = session.get('user_id')
@@ -181,9 +182,13 @@ def sended_resume():
             sended_resumes.append(send_resume)
         return render_template('menu/sended_resume.html',sended_resumes=sended_resumes)
     
-@bp.route('/tuijian')
-def tuijian():
-    if request.method == 'GET':
-        pass
-    else:
-        pass
+# @bp.route('/tuijian',methods=['POST','GET'])
+# def tuijian():
+#     if request.method == 'GET':
+#         print('get')
+#         time.sleep(1)
+#         return redirect(url_for('menu.menu',tuijian='True'))
+#     else:
+#         print('post')
+#         time.sleep(3)
+#         return redirect(url_for('menu.menu'))
