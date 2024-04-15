@@ -160,7 +160,7 @@ def menu():
         page = int(request.form.get('page', 1))  # 获取当前页码，默认为1 
         page_results, total_pages = get_total_pages(results,results_per_page,page)
         time.sleep(4)
-        return render_template('index.html',user=get_user,results=page_results,total_pages=total_pages,page=page) 
+        return render_template('index.html',user=get_user,results=page_results,total_pages=total_pages,page=page,tj=1) 
     if request.method == 'GET':
         keyword = request.args.get('keyword')
         if keyword==None:
@@ -170,7 +170,7 @@ def menu():
         page = int(request.args.get('page', 1))  # 获取当前页码，默认为1 
         page_results, total_pages = get_total_pages(results,results_per_page,page)
         
-        return render_template('index.html',results=page_results,keyword=keyword,total_pages=total_pages,page=page)
+        return render_template('index.html',results=page_results,keyword=keyword,total_pages=total_pages,page=page,tj=1)
 
 
 @bp.route('/logout',methods=['GET','POST'])
