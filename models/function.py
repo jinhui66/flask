@@ -20,7 +20,7 @@ def get_total_pages(results,results_per_page,page):
 def redis_search_positions(keyword,Position):
     cached_data = xtredis.get(keyword)
     if cached_data:
-        results = json.loads(cached_data)
+        results_data = json.loads(cached_data)
         # print('从缓存')
     else:
         # print('从数据库')
