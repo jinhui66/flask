@@ -11,8 +11,10 @@ def get_total_pages(results,results_per_page,page):
     start_index = (page - 1) * results_per_page  
     end_index = start_index + results_per_page  
     page_results = results[start_index:end_index]  
-    # print(len(results))
+
     total_pages = (len(results) + results_per_page - 1) // results_per_page
+    print(total_pages)
+
     return page_results,total_pages  
 
 def redis_search_positions(keyword,Position):
@@ -30,7 +32,6 @@ def redis_search_positions(keyword,Position):
                     Position.description.like(f'%{keyword}%'))
                 ).all()
 
-
         results_data = []
         for result in results:
             if result.public == 1:
@@ -45,12 +46,13 @@ def redis_search_positions(keyword,Position):
                 "release_time": result.release_time,
                 "admin": result.admin.to_dict()
                 })
+        # print(len(results_data))
         # 序列化用户数据
         results_json = json.dumps(results_data,cls=ComplexEncoder)
         # 使用键将用户数据设置在Redis缓存中
         xtredis.set(keyword, results_json, ex=10)  # 根据需要设置过期时间
         
-    return results
+    return results_data
 
 class ComplexEncoder(json.JSONEncoder):
     def default(self, obj):
